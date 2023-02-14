@@ -4,19 +4,15 @@ import SchoolIcon from "@mui/icons-material/School";
 
 import { Container } from "@mui/material";
 
-export async function getStaticProps() {
-  return { props: { title: "Bio" } };
-}
-
-export default function Home() {
+export default function Publications() {
   return (
     <Container maxWidth={true} disableGutters={true}>
       <Head>
-        <title>Nicholas Wensel Bio</title>
+        <title>N. Wensel|Publications</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <h1>Index</h1>
+        <h1>Publications</h1>
       </main>
     </Container>
   );

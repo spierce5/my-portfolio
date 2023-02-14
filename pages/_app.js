@@ -1,5 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
+import Layout from "../components/layout";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -48,7 +49,9 @@ function MyApp({ Component, pageProps, router }) {
     <>
       <ThemeProvider theme={theme}>
         {/* <AnimatePresence initial={false} mode="wait"> */}
-        <Component {...pageProps} key={router.route} />
+        <Layout>
+          <Component {...pageProps} key={router.route} />
+        </Layout>
         {/* </AnimatePresence> */}
         <ToastContainer {...toastOptions} />
       </ThemeProvider>
