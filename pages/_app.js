@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 // import * as gtag from "../lib/gtag";
-// import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -48,11 +48,11 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        {/* <AnimatePresence initial={false} mode="wait"> */}
-        <Layout>
-          <Component {...pageProps} key={router.route} />
-        </Layout>
-        {/* </AnimatePresence> */}
+        <AnimatePresence initial={false} mode="wait">
+          <Layout>
+            <Component {...pageProps} key={router.route} />
+          </Layout>
+        </AnimatePresence>
         <ToastContainer {...toastOptions} />
       </ThemeProvider>
     </>

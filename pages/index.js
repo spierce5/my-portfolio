@@ -1,16 +1,13 @@
 import Head from "next/head";
+import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
 
 import { Container } from "@mui/material";
 
-export async function getStaticProps() {
-  return { props: { title: "Bio" } };
-}
-
 export default function Home() {
   return (
-    <Container maxWidth={true} disableGutters={true}>
+    <Container disableGutters={true}>
       <Head>
         <title>Nicholas Wensel Bio</title>
         <link rel="icon" href="/bookmark-book.ico" />
