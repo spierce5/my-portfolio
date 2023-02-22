@@ -45,13 +45,13 @@ function MyApp({ Component, pageProps, router }) {
     // };
   }, [router.events]);
 
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <AnimatePresence initial={false} mode="wait">
-          <Layout>
-            <Component {...pageProps} key={router.route} />
-          </Layout>
+          {getLayout(<Component {...pageProps} key={router.route} />)}
         </AnimatePresence>
         <ToastContainer {...toastOptions} />
       </ThemeProvider>
