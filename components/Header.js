@@ -40,13 +40,9 @@ export default function Header() {
    */
   return (
     <Stack
-      direction="row"
+      className="flex-col justify-center md:flex-row md:justify-end md:pt-12 md:pr-16"
       style={{ position: "sticky" }}
-      sx={{
-        justifyContent: "flex-end",
-        paddingTop: "50px",
-        paddingRight: "50px",
-      }}
+      sx={{}}
     >
       <Link
         href="/"

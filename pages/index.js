@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
 
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <h1>Index</h1>
+        <Typography variant="h5">Index</Typography>
       </main>
     </Container>
   );
