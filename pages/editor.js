@@ -5,9 +5,16 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import RichTextEditor from "../components/RichTextEditor";
 
 export default function Editor() {
-  return <></>;
+  return (
+    <>
+      <div>
+        <RichTextEditor />
+      </div>
+    </>
+  );
 }
 
 Editor.getLayout = (page) => page;

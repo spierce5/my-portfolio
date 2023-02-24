@@ -1,4 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
+import "react-quill/dist/quill.snow.css";
 import "../styles/globals.css";
 import Layout from "../components/layout";
 import { useEffect } from "react";
