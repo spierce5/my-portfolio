@@ -37,7 +37,7 @@ export default function Footer() {
         bottom: 0,
         width: "100%",
         padding: 0,
-        zIndex: 10,
+        zIndex: 20,
       }}
     >
       <Divider />

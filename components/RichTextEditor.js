@@ -6,5 +6,5 @@ const QuillNoSSRWrapper = dynamic(import("react-quill"), {
 });
 
 export default function RichTextEditor() {
-  return <QuillNoSSRWrapper theme="snow" />;
+  return <QuillNoSSRWrapper theme="snow" className="h-40" />;
 }
