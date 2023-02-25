@@ -33,7 +33,7 @@ export default function Footer() {
       maxWidth={false}
       disableGutters={false}
       sx={{
-        position: "fixed",
+        position: "relative",
         bottom: 0,
         width: "100%",
         padding: 0,
