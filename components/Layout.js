@@ -8,7 +8,7 @@ export default function Layout({ metas, children }) {
       {/* <AppBar /> */}
       <Header />
       <main>{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

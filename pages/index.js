@@ -13,7 +13,6 @@ export default function Home() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <h1>Index</h1>
         <Typography variant="h5">Index</Typography>
       </main>
     </Container>

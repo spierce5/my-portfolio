@@ -6,7 +6,7 @@ import { Container } from "@mui/material";
 
 export default function Home() {
   return (
-    <Container maxWidth={true}>
+    <Container maxWidth="false" disableGutters={true}>
       <Head>
         <title>N. Wensel|Curriculum Vitae</title>
         <link rel="icon" href="/bookmark-book.ico" />

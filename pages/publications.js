@@ -6,7 +6,7 @@ import { Container } from "@mui/material";
 
 export default function Publications() {
   return (
-    <Container maxWidth={true} disableGutters={true}>
+    <Container disableGutters={true}>
       <Head>
         <title>N. Wensel|Publications</title>
         <link rel="icon" href="/bookmark-book.ico" />
