@@ -24,11 +24,12 @@ export default function Home() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <div
+        <article
+          className="prose lg:prose-xl"
           dangerouslySetInnerHTML={{
             __html: content.biography,
           }}
-        ></div>
+        ></article>
       </main>
     </Container>
   );

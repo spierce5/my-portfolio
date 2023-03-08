@@ -20,8 +20,12 @@ export default function ResearchInterest() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <h1>Research Interest</h1>
-        <p>{content.research_interests}</p>
+        <article
+          className="prose lg:prose-xl"
+          dangerouslySetInnerHTML={{
+            __html: content.research_interests,
+          }}
+        />
       </main>
     </Container>
   );
