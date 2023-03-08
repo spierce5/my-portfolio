@@ -7,19 +7,39 @@ import {
   Stack,
   Button,
 } from "@mui/material";
+import { getContent, updateContent } from "../firebase/firebase.js";
 import RichTextEditor from "../components/RichTextEditor";
 import AppBar from "../components/AppBar";
 
 export default function Editor() {
-  const [bio, setBio] = useState("<p>I am the bio</p>");
-  const [researchInterests, setResearchInterests] = useState(
-    "<p>I like to research</p>"
-  );
+  const [content, setContent] = useState({
+    biography: "",
+    research_interests: "",
+  });
   const [cvFile, setCvFile] = useState("demo-files/demo_resume.pdf");
 
   useEffect(() => {
-    console.log(cvFile);
-  }, []);
+    getContent(setContent);
+  }, [setContent]);
+
+  const handleSave = useCallback(
+    (e) => {
+      const target = e.target;
+      const name = target.name;
+      const path = name.replace("save_", "");
+      updateContent(path, content[path]);
+    },
+    [content]
+  );
+
+  const handleChange = useCallback(
+    (value, attribute) => {
+      let editedContent = { ...content };
+      editedContent[attribute] = value;
+      setContent(editedContent);
+    },
+    [content, setContent]
+  );
 
   const handleFileUpload = useCallback(
     (e) => {
@@ -57,22 +77,39 @@ export default function Editor() {
           />
         </Stack>
         <Stack direction="column" spacing={2} className="grow md:mx-4">
-          <Typography variant="h5">Bio</Typography>
+          <Typography variant="h5">biography</Typography>
           <div className="flex-col space-y-28 md:space-y-12">
-            <RichTextEditor value={bio} onChange={setBio} />
+            <RichTextEditor
+              name="biography"
+              value={content.biography}
+              onChange={(value) => handleChange(value, "biography")}
+            />
             <Stack direction="row" spacing={1} className="justify-end">
-              <Button variant="outlined">Save</Button>
+              <Button
+                name="save_biography"
+                onClick={handleSave}
+                variant="outlined"
+              >
+                Save
+              </Button>
               <Button variant="outlined">Cancel</Button>
             </Stack>
           </div>
           <Typography variant="h5">Research Interests</Typography>
           <div className="flex-col space-y-28 md:space-y-12">
             <RichTextEditor
-              value={researchInterests}
-              onChange={setResearchInterests}
+              name="research_interests"
+              value={content.research_interests}
+              onChange={(value) => handleChange(value, "research_interests")}
             />
             <Stack direction="row" spacing={1} className="justify-end">
-              <Button variant="outlined">Save</Button>
+              <Button
+                name="save_research_interests"
+                onClick={handleSave}
+                variant="outlined"
+              >
+                Save
+              </Button>
               <Button variant="outlined">Cancel</Button>
             </Stack>
           </div>
