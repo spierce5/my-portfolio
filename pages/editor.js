@@ -7,20 +7,38 @@ import {
   Stack,
   Button,
 } from "@mui/material";
-import { getContent, updateContent } from "../firebase/firebase.js";
+import {
+  getContent,
+  updateContent,
+  getContentOnce,
+} from "../firebase/firebase.js";
 import RichTextEditor from "../components/RichTextEditor";
 import AppBar from "../components/AppBar";
 
-export default function Editor() {
+export async function getServerSideProps() {
+  const data = await getContentOnce();
+  const temp = {
+    biography: "<p>The <em>Biography</em></p>",
+    research_interests: "<p>Interesting</p>",
+  };
+
+  return {
+    props: {
+      serverSideProps: data,
+    },
+  };
+}
+
+export default function Editor({ serverSideProps }) {
   const [content, setContent] = useState({
-    biography: "",
-    research_interests: "",
+    biography: serverSideProps.biography,
+    research_interests: serverSideProps.research_interests,
   });
   const [cvFile, setCvFile] = useState("demo-files/demo_resume.pdf");
 
   useEffect(() => {
-    getContent(setContent);
-  }, [setContent]);
+    console.log(serverSideProps);
+  }, []);
 
   const handleSave = useCallback(
     (e) => {

@@ -44,6 +44,24 @@ export const getContent = (setContentCallback) => {
   );
 };
 
+export const getContentOnce = async () => {
+  let data = {};
+  const reference = ref(db, "content/");
+  return await get(reference)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        data = snapshot.val();
+        return data;
+      } else {
+        console.log("No data available");
+        return {};
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 export const updateContent = (path, value) => {
   let reference = ref(db, "content/");
   let updatedContent = {
