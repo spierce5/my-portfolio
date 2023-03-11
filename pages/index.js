@@ -4,19 +4,21 @@ import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
-import { getContent } from "../firebase/firebase.js";
+import { getContent, getContentOnce } from "../firebase/firebase.js";
 
 import { Container, Typography } from "@mui/material";
 
-export default function Home() {
-  const [content, setContent] = useState({
-    biography: "",
-  });
+export async function getServerSideProps() {
+  const data = await getContentOnce();
+  const biography = (({ biography }) => ({ biography }))(data);
+  return {
+    props: {
+      serverSideProps: biography,
+    },
+  };
+}
 
-  useEffect(() => {
-    getContent(setContent);
-  }, [setContent]);
-
+export default function Home({ serverSideProps }) {
   return (
     <Container disableGutters={true}>
       <Head>
@@ -27,7 +29,7 @@ export default function Home() {
         <article
           className="prose lg:prose-xl"
           dangerouslySetInnerHTML={{
-            __html: content.biography,
+            __html: serverSideProps.biography,
           }}
         ></article>
       </main>

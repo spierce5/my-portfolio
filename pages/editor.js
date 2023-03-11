@@ -17,10 +17,6 @@ import AppBar from "../components/AppBar";
 
 export async function getServerSideProps() {
   const data = await getContentOnce();
-  const temp = {
-    biography: "<p>The <em>Biography</em></p>",
-    research_interests: "<p>Interesting</p>",
-  };
 
   return {
     props: {
