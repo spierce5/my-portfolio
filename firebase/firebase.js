@@ -21,6 +21,7 @@ import {
   uploadBytes,
   deleteObject,
 } from "firebase/storage";
+
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -74,5 +75,29 @@ export const updateContent = (path, value) => {
     })
     .catch((error) => {
       console.log("Unable to update content: " + error);
+    });
+};
+
+export const uploadFile = (path, file) => {
+  const storage = getStorage();
+  const sRef = storageRef(storage, path);
+  uploadBytes(sRef, file)
+    .then((snapshot) => {
+      console.log("File uploaded successfully");
+    })
+    .catch((error) => {
+      console.log("Error uploading file: " + err);
+    });
+};
+
+export const getFile = async (path) => {
+  const storage = getStorage();
+  const sRef = storageRef(storage, path);
+  return await getDownloadURL(sRef)
+    .then((url) => {
+      return url;
+    })
+    .catch((error) => {
+      console.log("Error retrieving file url: " + error);
     });
 };

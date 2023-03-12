@@ -11,12 +11,19 @@ import {
   getContent,
   updateContent,
   getContentOnce,
+  uploadFile,
+  getFile,
 } from "../firebase/firebase.js";
 import RichTextEditor from "../components/RichTextEditor";
 import AppBar from "../components/AppBar";
 
 export async function getServerSideProps() {
-  const data = await getContentOnce();
+  const content = await getContentOnce();
+  const cvFile = await getFile("curriculum_vitae.pdf");
+  const data = {
+    curriculum_vitae: cvFile,
+    ...content,
+  };
 
   return {
     props: {
@@ -30,11 +37,11 @@ export default function Editor({ serverSideProps }) {
     biography: serverSideProps.biography,
     research_interests: serverSideProps.research_interests,
   });
-  const [cvFile, setCvFile] = useState("demo-files/demo_resume.pdf");
-
-  useEffect(() => {
-    console.log(serverSideProps);
-  }, []);
+  const [cvFile, setCvFile] = useState({
+    url: serverSideProps.curriculum_vitae,
+    newFile: null,
+  });
+  const [isNewCvFile, setIsNewCvFile] = useState(false);
 
   const handleSave = useCallback(
     (e) => {
@@ -46,6 +53,12 @@ export default function Editor({ serverSideProps }) {
     [content]
   );
 
+  const handleFileUpload = useCallback(() => {
+    const path = "/curriculum_vitae.pdf";
+    uploadFile(path, cvFile.newFile);
+    setIsNewCvFile(false);
+  }, [cvFile, uploadFile, setIsNewCvFile]);
+
   const handleChange = useCallback(
     (value, attribute) => {
       let editedContent = { ...content };
@@ -55,17 +68,20 @@ export default function Editor({ serverSideProps }) {
     [content, setContent]
   );
 
-  const handleFileUpload = useCallback(
+  const handleFileSelection = useCallback(
     (e) => {
-      let url = "";
+      let newCvFile = {};
       const target = e.target;
       const files = target.files;
       const [file] = files;
       if (file) {
-        url = URL.createObjectURL(file);
+        newCvFile = {
+          url: URL.createObjectURL(file),
+          newFile: file,
+        };
       }
-      console.log(url);
-      setCvFile(url);
+      setCvFile(newCvFile);
+      setIsNewCvFile(true);
     },
     [cvFile, setCvFile]
   );
@@ -79,12 +95,24 @@ export default function Editor({ serverSideProps }) {
       >
         <Stack direction="column" spacing={2} className="grow md:mx-4">
           <Typography variant="h5">Curriculum Vitae</Typography>
-          <Button variant="contained" component="label" sx={{ width: 150 }}>
-            Upload CV
-            <input type="file" hidden onChange={handleFileUpload} />
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button variant="contained" component="label" sx={{ width: 150 }}>
+              Select File
+              <input type="file" hidden onChange={handleFileSelection} />
+            </Button>
+            <Button
+              variant="contained"
+              component="label"
+              // disabled={!isNewCvFile}
+              disabled={false}
+              sx={{ width: 150 }}
+              onClick={handleFileUpload}
+            >
+              Upload
+            </Button>
+          </Stack>
           <object
-            data={cvFile}
+            data={cvFile.url}
             type="application/pdf"
             width="100%"
             className="h-screen"
