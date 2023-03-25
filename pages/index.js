@@ -10,7 +10,9 @@ import { Container, Typography } from "@mui/material";
 
 export async function getServerSideProps() {
   const data = await getContentOnce();
-  const biography = (({ biography }) => ({ biography }))(data);
+  const biography = (({ biography }) => ({ biography: biography.published }))(
+    data
+  );
   return {
     props: {
       serverSideProps: biography,

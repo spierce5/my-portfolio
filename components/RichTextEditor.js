@@ -9,7 +9,7 @@ export default function RichTextEditor(props) {
   return (
     <QuillNoSSRWrapper
       theme="snow"
-      className="h-80"
+      className={props.height || "h-80"}
       value={props.value}
       onChange={props.onChange}
     />

@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import {
   SwipeableDrawer as MUISwipeableDrawer,
   Box,
@@ -6,6 +7,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Divider,
 } from "@mui/material";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -13,9 +15,13 @@ import BiotechIcon from "@mui/icons-material/Biotech";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 import DescriptionIcon from "@mui/icons-material/Description";
 import EmailIcon from "@mui/icons-material/Email";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 export default function SwipeableDrawer(props) {
-  const listItems = [
+  const [pagesOpen, setPagesOpen] = useState(false);
+  const [editPanelOpen, setEditPanelOpen] = useState(true);
+
+  const pages = [
     {
       title: "Biography",
       route: "/",
@@ -42,7 +48,33 @@ export default function SwipeableDrawer(props) {
       icon: <EmailIcon />,
     },
   ];
-  const list = () => (
+
+  const editPanelItems = () => {
+    if (editPanelOpen) {
+      return props.editableObjects.map((item, index) => (
+        <ListItem key={item.title} disablePadding>
+          <ListItemButton onClick={() => props.handleSelect(item.value)}>
+            <ListItemText primary={item.title} />
+          </ListItemButton>
+        </ListItem>
+      ));
+    }
+  };
+
+  const pageItems = () => {
+    if (pagesOpen) {
+      return pages.map((item, index) => (
+        <ListItem key={item.title} disablePadding>
+          <ListItemButton href={item.route}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.title} />
+          </ListItemButton>
+        </ListItem>
+      ));
+    }
+  };
+
+  const menu = () => (
     <Box
       sx={{ width: 250 }}
       role="presentation"
@@ -50,14 +82,40 @@ export default function SwipeableDrawer(props) {
       onKeyDown={() => console.log("keydown")}
     >
       <List>
-        {listItems.map((item, index) => (
-          <ListItem key={item.title} disablePadding>
-            <ListItemButton href={item.route}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItemButton
+          className="bg-gray-100"
+          onClick={() => setEditPanelOpen(!editPanelOpen)}
+        >
+          <ListItemText primary="Editor" />
+          <ListItemIcon>
+            <KeyboardArrowDown
+              sx={{
+                transform: editPanelOpen ? "rotate(0)" : "rotate(-90deg)",
+                transition: "0.2s",
+              }}
+            />
+          </ListItemIcon>
+        </ListItemButton>
+        <Divider />
+        {editPanelItems()}
+        <Divider />
+        <ListItemButton
+          className="bg-gray-100"
+          onClick={() => setPagesOpen(!pagesOpen)}
+        >
+          <ListItemText primary="Site Pages" />
+          <ListItemIcon>
+            <KeyboardArrowDown
+              sx={{
+                transform: pagesOpen ? "rotate(0)" : "rotate(-90deg)",
+                transition: "0.2s",
+              }}
+            />
+          </ListItemIcon>
+        </ListItemButton>
+        <Divider />
+        {pageItems()}
+        <Divider />
       </List>
     </Box>
   );
@@ -68,7 +126,7 @@ export default function SwipeableDrawer(props) {
       onOpen={props.onOpen}
       onClose={props.onClose}
     >
-      {list()}
+      {menu()}
     </MUISwipeableDrawer>
   );
 }

@@ -63,8 +63,11 @@ export const getContentOnce = async () => {
     });
 };
 
-export const updateContent = (path, value) => {
+export const updateContent = (path, version, value) => {
   let reference = ref(db, "content/");
+  if (version === "draft") {
+    value["draft_last_saved"] = Date();
+  }
   let updatedContent = {
     [path]: value,
   };

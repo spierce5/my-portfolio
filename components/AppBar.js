@@ -9,7 +9,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SwipeableDrawer from "./SwipeableDrawer";
 
-export default function AppBar() {
+export default function AppBar(props) {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const handleOpen = useCallback(() => {
@@ -19,6 +19,7 @@ export default function AppBar() {
   const handleClose = useCallback(() => {
     setDrawerIsOpen(false);
   }, [setDrawerIsOpen]);
+
   return (
     <>
       <MUIAppBar position="sticky" color="primary">
@@ -42,6 +43,8 @@ export default function AppBar() {
         isOpen={drawerIsOpen}
         onOpen={handleOpen}
         onClose={handleClose}
+        handleSelect={props.handleSelect}
+        editableObjects={props.editableObjects}
       />
     </>
   );

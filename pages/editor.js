@@ -6,6 +6,10 @@ import {
   Container,
   Stack,
   Button,
+  Dialog,
+  Card,
+  CardActionArea,
+  CardContent,
 } from "@mui/material";
 import {
   getContent,
@@ -16,6 +20,11 @@ import {
 } from "../firebase/firebase.js";
 import RichTextEditor from "../components/RichTextEditor";
 import AppBar from "../components/AppBar";
+import ImageCropper from "../components/ImageCropper";
+import ContentEditor from "../components/ContentEditor";
+import PDFEditor from "../components/PDFEditor";
+import PhotoEditor from "../components/PhotoEditor";
+import CloseIcon from "@mui/icons-material/Close";
 
 export async function getServerSideProps() {
   const content = await getContentOnce();
@@ -42,13 +51,22 @@ export default function Editor({ serverSideProps }) {
     newFile: null,
   });
   const [isNewCvFile, setIsNewCvFile] = useState(false);
+  const [currentSelection, setCurrentSelection] = useState("biography");
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleSave = useCallback(
+  const handleSelect = useCallback(
+    (value) => {
+      setDialogOpen(true);
+      setCurrentSelection(value);
+    },
+    [setCurrentSelection, setDialogOpen]
+  );
+
+  const handlePublish = useCallback(
     (e) => {
       const target = e.target;
       const name = target.name;
-      const path = name.replace("save_", "");
-      updateContent(path, content[path]);
+      updateContent(name, content[name]);
     },
     [content]
   );
@@ -86,76 +104,133 @@ export default function Editor({ serverSideProps }) {
     [cvFile, setCvFile]
   );
 
+  const getDialogContent = () => {
+    const dialogProperties = {
+      biography: {
+        title: "Biography",
+        reference: "biography",
+        content: content.biography,
+        type: "richtext",
+      },
+      research_interests: {
+        title: "Research Interests",
+        reference: "research_interests",
+        content: content.research_interests,
+        type: "richtext",
+      },
+      curriculum_vitae: {
+        title: "Curriculum Vitae",
+        reference: "curriculum_vitae",
+        pdf: serverSideProps.curriculum_vitae,
+        type: "pdf",
+      },
+      biography_image: {
+        title: "Biography Page Image",
+        reference: "biography_image",
+        type: "image",
+      },
+      research_interests_image: {
+        title: "Research Interests Image",
+        reference: "research_interests_image",
+        type: "image",
+      },
+      curriculum_vitae_image: {
+        title: "Curriculum Vitae Image",
+        reference: "curriculum_vitae_image",
+        type: "image",
+      },
+    };
+
+    const currentDialog = dialogProperties[currentSelection];
+    switch (currentDialog.type) {
+      case "richtext":
+        return (
+          <ContentEditor
+            title={currentDialog.title}
+            content={currentDialog.content}
+            reference={currentDialog.reference}
+          />
+        );
+      case "pdf":
+        return (
+          <PDFEditor
+            title={currentDialog.title}
+            pdf={currentDialog.pdf}
+            reference={currentDialog.reference}
+          />
+        );
+      case "image":
+        return (
+          <PhotoEditor
+            title={currentDialog.title}
+            reference={currentDialog.reference}
+          />
+        );
+      default:
+        return;
+    }
+  };
+
+  const editableObjects = [
+    {
+      title: "Biography Content",
+      value: "biography",
+    },
+    {
+      title: "Research Interests Content",
+      value: "research_interests",
+    },
+    {
+      title: "Curriculum Vitae PDF",
+      value: "curriculum_vitae",
+    },
+    {
+      title: "Biography Image",
+      value: "biography_image",
+    },
+    {
+      title: "Research Interests Image",
+      value: "research_interests_image",
+    },
+    {
+      title: "Curriculum Vitae Image",
+      value: "curriculum_vitae_image",
+    },
+  ];
+
+  const getTiles = () => {
+    return editableObjects.map((obj) => (
+      <Card raised={false} key={obj.value} className="h-40 w-60 rounded-none">
+        <CardActionArea
+          className="h-full"
+          onClick={() => handleSelect(obj.value)}
+        >
+          <CardContent className="h-full text-center flex items-center justify-center pl-12 pr-12">
+            <Typography variant="h6" className="">
+              {obj.title}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    ));
+  };
+
   return (
     <>
-      <AppBar />
-      <Container
-        maxWidth={false}
-        className="pt-6 pb-6 flex flex-col-reverse md:flex-row md:justify-between md:px-8"
-      >
-        <Stack direction="column" spacing={2} className="grow md:mx-4">
-          <Typography variant="h5">Curriculum Vitae</Typography>
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" component="label" sx={{ width: 150 }}>
-              Select File
-              <input type="file" hidden onChange={handleFileSelection} />
-            </Button>
-            <Button
-              variant="contained"
-              component="label"
-              // disabled={!isNewCvFile}
-              disabled={false}
-              sx={{ width: 150 }}
-              onClick={handleFileUpload}
-            >
-              Upload
-            </Button>
-          </Stack>
-          <object
-            data={cvFile.url}
-            type="application/pdf"
-            width="100%"
-            className="h-screen"
-          />
-        </Stack>
-        <Stack direction="column" spacing={2} className="grow md:mx-4">
-          <Typography variant="h5">biography</Typography>
-          <div className="flex-col space-y-28 md:space-y-12">
-            <RichTextEditor
-              name="biography"
-              value={content.biography}
-              onChange={(value) => handleChange(value, "biography")}
-            />
-            <Stack direction="row" spacing={1} className="justify-end">
-              <Button
-                name="save_biography"
-                onClick={handleSave}
-                variant="outlined"
-              >
-                Save
-              </Button>
-              <Button variant="outlined">Cancel</Button>
-            </Stack>
-          </div>
-          <Typography variant="h5">Research Interests</Typography>
-          <div className="flex-col space-y-28 md:space-y-12">
-            <RichTextEditor
-              name="research_interests"
-              value={content.research_interests}
-              onChange={(value) => handleChange(value, "research_interests")}
-            />
-            <Stack direction="row" spacing={1} className="justify-end">
-              <Button
-                name="save_research_interests"
-                onClick={handleSave}
-                variant="outlined"
-              >
-                Save
-              </Button>
-              <Button variant="outlined">Cancel</Button>
-            </Stack>
-          </div>
-        </Stack>
+      <AppBar editableObjects={editableObjects} handleSelect={handleSelect} />
+      <Container maxWidth={false} className="h-full pt-6 pb-6  md:px-8">
+        <div className="h-full flex flex-wrap flex-row align-center justify-center">
+          {getTiles()}
+        </div>
+        <Dialog open={dialogOpen} fullScreen={true}>
+          <IconButton
+            onClick={() => setDialogOpen(false)}
+            className="absolute top-0 right-0"
+          >
+            <CloseIcon />
+          </IconButton>
+          {getDialogContent()}
+        </Dialog>
       </Container>
     </>
   );

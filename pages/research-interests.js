@@ -9,7 +9,7 @@ import { Container } from "@mui/material";
 export async function getServerSideProps() {
   const data = await getContentOnce();
   const researchInterests = (({ research_interests }) => ({
-    research_interests,
+    research_interests: research_interests.published,
   }))(data);
   return {
     props: {
