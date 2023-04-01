@@ -189,13 +189,16 @@ export default function Editor({ serverSideProps }) {
   };
 
   return (
-    <>
+    <div className="h-screen min-h-max">
       <AppBar
         editableObjects={Object.values(editableObjects)}
         handleSelect={handleSelect}
       />
-      <Container maxWidth={false} className="h-full pt-6 pb-6  md:px-8">
-        <div className="h-full flex flex-wrap flex-row align-center justify-center">
+      <Container
+        maxWidth={false}
+        className="h-5/6 pt-6 pb-6  md:px-8 flex justify-center content-end items-end"
+      >
+        <div className="h-full w-full max-w-max max-h-max min-h-max justify-items-center content-center md:grid md:grid-cols-3 md:gap-0 ">
           {getTiles()}
         </div>
         <Dialog open={dialogOpen} fullScreen={true}>
@@ -208,7 +211,7 @@ export default function Editor({ serverSideProps }) {
           {getDialogContent()}
         </Dialog>
       </Container>
-    </>
+    </div>
   );
 }
 
