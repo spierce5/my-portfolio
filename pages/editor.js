@@ -173,7 +173,11 @@ export default function Editor({ serverSideProps }) {
 
   const getTiles = () => {
     return Object.values(editableObjects).map((obj) => (
-      <Card raised={false} key={obj.value} className="h-40 w-60 rounded-none">
+      <Card
+        raised={false}
+        key={obj.value}
+        className="h-40 w-40 md:h-40 md:w-60 rounded-none"
+      >
         <CardActionArea
           className="h-full"
           onClick={() => handleSelect(obj.reference)}
@@ -198,7 +202,7 @@ export default function Editor({ serverSideProps }) {
         maxWidth={false}
         className="h-5/6 pt-6 pb-6  md:px-8 flex justify-center content-end items-end"
       >
-        <div className="h-full w-full max-w-max max-h-max min-h-max justify-items-center content-center md:grid md:grid-cols-3 md:gap-0 ">
+        <div className="h-full w-full max-w-max max-h-max min-h-max justify-items-center content-center grid grid-cols-2 md:grid-cols-3 md:gap-0 ">
           {getTiles()}
         </div>
         <Dialog open={dialogOpen} fullScreen={true}>
