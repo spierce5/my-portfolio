@@ -53,7 +53,7 @@ export default function SwipeableDrawer(props) {
     if (editPanelOpen) {
       return props.editableObjects.map((item, index) => (
         <ListItem key={item.title} disablePadding>
-          <ListItemButton onClick={() => props.handleSelect(item.value)}>
+          <ListItemButton onClick={() => props.handleSelect(item.reference)}>
             <ListItemText primary={item.title} />
           </ListItemButton>
         </ListItem>

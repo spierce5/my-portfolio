@@ -54,6 +54,42 @@ export default function Editor({ serverSideProps }) {
   const [currentSelection, setCurrentSelection] = useState("biography");
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  const editableObjects = {
+    biography: {
+      title: "Biography Content",
+      reference: "biography",
+      content: content.biography,
+      type: "richtext",
+    },
+    research_interests: {
+      title: "Research Interests Content",
+      reference: "research_interests",
+      content: content.research_interests,
+      type: "richtext",
+    },
+    curriculum_vitae: {
+      title: "Curriculum Vitae PDF",
+      reference: "curriculum_vitae",
+      pdf: serverSideProps.curriculum_vitae,
+      type: "pdf",
+    },
+    biography_image: {
+      title: "Biography Page Image",
+      reference: "biography_image",
+      type: "image",
+    },
+    research_interests_image: {
+      title: "Research Interests Image",
+      reference: "research_interests_image",
+      type: "image",
+    },
+    curriculum_vitae_image: {
+      title: "Curriculum Vitae Image",
+      reference: "curriculum_vitae_image",
+      type: "image",
+    },
+  };
+
   const handleSelect = useCallback(
     (value) => {
       setDialogOpen(true);
@@ -105,43 +141,7 @@ export default function Editor({ serverSideProps }) {
   );
 
   const getDialogContent = () => {
-    const dialogProperties = {
-      biography: {
-        title: "Biography",
-        reference: "biography",
-        content: content.biography,
-        type: "richtext",
-      },
-      research_interests: {
-        title: "Research Interests",
-        reference: "research_interests",
-        content: content.research_interests,
-        type: "richtext",
-      },
-      curriculum_vitae: {
-        title: "Curriculum Vitae",
-        reference: "curriculum_vitae",
-        pdf: serverSideProps.curriculum_vitae,
-        type: "pdf",
-      },
-      biography_image: {
-        title: "Biography Page Image",
-        reference: "biography_image",
-        type: "image",
-      },
-      research_interests_image: {
-        title: "Research Interests Image",
-        reference: "research_interests_image",
-        type: "image",
-      },
-      curriculum_vitae_image: {
-        title: "Curriculum Vitae Image",
-        reference: "curriculum_vitae_image",
-        type: "image",
-      },
-    };
-
-    const currentDialog = dialogProperties[currentSelection];
+    const currentDialog = editableObjects[currentSelection];
     switch (currentDialog.type) {
       case "richtext":
         return (
@@ -171,39 +171,12 @@ export default function Editor({ serverSideProps }) {
     }
   };
 
-  const editableObjects = [
-    {
-      title: "Biography Content",
-      value: "biography",
-    },
-    {
-      title: "Research Interests Content",
-      value: "research_interests",
-    },
-    {
-      title: "Curriculum Vitae PDF",
-      value: "curriculum_vitae",
-    },
-    {
-      title: "Biography Image",
-      value: "biography_image",
-    },
-    {
-      title: "Research Interests Image",
-      value: "research_interests_image",
-    },
-    {
-      title: "Curriculum Vitae Image",
-      value: "curriculum_vitae_image",
-    },
-  ];
-
   const getTiles = () => {
-    return editableObjects.map((obj) => (
+    return Object.values(editableObjects).map((obj) => (
       <Card raised={false} key={obj.value} className="h-40 w-60 rounded-none">
         <CardActionArea
           className="h-full"
-          onClick={() => handleSelect(obj.value)}
+          onClick={() => handleSelect(obj.reference)}
         >
           <CardContent className="h-full text-center flex items-center justify-center pl-12 pr-12">
             <Typography variant="h6" className="">
@@ -217,7 +190,10 @@ export default function Editor({ serverSideProps }) {
 
   return (
     <>
-      <AppBar editableObjects={editableObjects} handleSelect={handleSelect} />
+      <AppBar
+        editableObjects={Object.values(editableObjects)}
+        handleSelect={handleSelect}
+      />
       <Container maxWidth={false} className="h-full pt-6 pb-6  md:px-8">
         <div className="h-full flex flex-wrap flex-row align-center justify-center">
           {getTiles()}
