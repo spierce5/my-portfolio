@@ -25,6 +25,7 @@ import ContentEditor from "../components/ContentEditor";
 import PDFEditor from "../components/PDFEditor";
 import PhotoEditor from "../components/PhotoEditor";
 import CloseIcon from "@mui/icons-material/Close";
+import { IntegrationInstructionsRounded } from "@mui/icons-material";
 
 export async function getServerSideProps() {
   const content = await getContentOnce();
@@ -83,9 +84,14 @@ export default function Editor({ serverSideProps }) {
       reference: "research_interests_image",
       type: "image",
     },
-    curriculum_vitae_image: {
-      title: "Curriculum Vitae Image",
-      reference: "curriculum_vitae_image",
+    publications_image: {
+      title: "Publications Image",
+      reference: "publications_image",
+      type: "image",
+    },
+    contact_image: {
+      title: "Contact Image",
+      reference: "contact_image",
       type: "image",
     },
   };
@@ -172,7 +178,9 @@ export default function Editor({ serverSideProps }) {
   };
 
   const getTiles = () => {
-    return Object.values(editableObjects).map((obj) => (
+    const numTiles = Object.values(editableObjects).length;
+    const numTilesToAdd = (3 - (numTiles % 3)) % 3;
+    let tiles = Object.values(editableObjects).map((obj) => (
       <Card
         raised={false}
         key={obj.value}
@@ -190,6 +198,17 @@ export default function Editor({ serverSideProps }) {
         </CardActionArea>
       </Card>
     ));
+    for (let i = 0; i < numTilesToAdd; i++) {
+      tiles.push(
+        <Card
+          raised={false}
+          key={"empty-tile-" + i}
+          className="h-40 w-40 md:h-40 md:w-60 rounded-none"
+        ></Card>
+      );
+    }
+
+    return tiles;
   };
 
   return (
