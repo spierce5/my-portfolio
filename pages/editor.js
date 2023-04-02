@@ -203,7 +203,10 @@ export default function Editor({ serverSideProps }) {
         <Card
           raised={false}
           key={"empty-tile-" + i}
-          className="h-40 w-40 md:h-40 md:w-60 rounded-none"
+          className={
+            "rounded-none h-40 w-40 md:h-40 md:w-60 md:visible " +
+            (i == 0 ? "visible" : "invisible")
+          }
         ></Card>
       );
     }
@@ -219,9 +222,9 @@ export default function Editor({ serverSideProps }) {
       />
       <Container
         maxWidth={false}
-        className="h-5/6 pt-6 pb-6  md:px-8 flex justify-center content-end items-end"
+        className="h-5/6 min-h-max pt-6 pb-6  md:px-8 flex justify-center items-center"
       >
-        <div className="h-full w-full max-w-max max-h-max min-h-max justify-items-center content-center grid grid-cols-2 md:grid-cols-3 md:gap-0 ">
+        <div className="w-full max-w-max mt-auto min-h-max justify-items-center content-center grid grid-cols-2 md:grid-cols-3 md:gap-0 md:mt-0 md:shadow-xl">
           {getTiles()}
         </div>
         <Dialog open={dialogOpen} fullScreen={true}>
