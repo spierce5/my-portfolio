@@ -34,7 +34,7 @@ const theme = createTheme({
       main: "#424242",
     },
     secondary: {
-      main: "#424242",
+      main: "#a1a1aa",
     },
     tertiary: {
       main: "#ffffff",

@@ -1,9 +1,22 @@
 import { useState, useCallback, useEffect } from "react";
-import { Stack, Button, Typography, Container } from "@mui/material";
+import { useTheme } from "styled-components";
+import {
+  Stack,
+  Button,
+  Typography,
+  Container,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  ListSubheader,
+  Divider,
+} from "@mui/material";
 import { uploadFile, getFile, getContent } from "../firebase/firebase.js";
 import ImageCropper from "../components/ImageCropper";
 
 export default function PhotoEditor(props) {
+  const theme = useTheme();
   const [image, setImage] = useState({
     fileName: null,
     url: "",
@@ -62,11 +75,13 @@ export default function PhotoEditor(props) {
   return (
     <Container maxWidth={false} className="h-screen">
       <div className="flex flex-col md:flex-row h-full">
-        <Stack spacing={1} className="h-full md:w-1/4">
+        <Stack spacing={0} className="h-full md:w-1/4 items-center">
           <Typography variant="h3">Photo Editor</Typography>
-          <Typography variant="h5">{props.title}</Typography>
+          <Typography variant="h5" className="mb-8">
+            {props.title}
+          </Typography>
 
-          <Stack direction="row" spacing={1} className="justify-end">
+          <Stack className="hidden" direction="row" spacing={1}>
             <Button component="label" variant="outlined">
               Upload
               <input
@@ -84,6 +99,38 @@ export default function PhotoEditor(props) {
               Publish
             </Button>
           </Stack>
+          <List
+            className="max-w-max border-2"
+            sx={{ color: "primary.main" }}
+            subheader={
+              <ListSubheader
+                className="text-center"
+                component="div"
+                id="nested-list-subheader"
+              >
+                Options
+              </ListSubheader>
+            }
+          >
+            <Divider light={false} />
+            <ListItemButton>
+              <ListItemText primaryTypographyProps={{ variant: "button" }}>
+                Upload New Image
+              </ListItemText>
+            </ListItemButton>
+            <Divider light={false} />
+            <ListItemButton>
+              <ListItemText primaryTypographyProps={{ variant: "button" }}>
+                Discard Changes
+              </ListItemText>
+            </ListItemButton>
+            <Divider light={false} />
+            <ListItemButton>
+              <ListItemText primaryTypographyProps={{ variant: "button" }}>
+                Publish Cropped Image
+              </ListItemText>
+            </ListItemButton>
+          </List>
         </Stack>
         <div className="flex flex-col justify-center space-y-28 md:space-y-12 w-full h-full">
           <ImageCropper src={image.url} />
