@@ -47,11 +47,6 @@ export default function Editor({ serverSideProps }) {
     biography: serverSideProps.biography,
     research_interests: serverSideProps.research_interests,
   });
-  const [cvFile, setCvFile] = useState({
-    url: serverSideProps.curriculum_vitae,
-    newFile: null,
-  });
-  const [isNewCvFile, setIsNewCvFile] = useState(false);
   const [currentSelection, setCurrentSelection] = useState("biography");
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -102,48 +97,6 @@ export default function Editor({ serverSideProps }) {
       setCurrentSelection(value);
     },
     [setCurrentSelection, setDialogOpen]
-  );
-
-  const handlePublish = useCallback(
-    (e) => {
-      const target = e.target;
-      const name = target.name;
-      updateContent(name, content[name]);
-    },
-    [content]
-  );
-
-  const handleFileUpload = useCallback(() => {
-    const path = "/curriculum_vitae.pdf";
-    uploadFile(path, cvFile.newFile);
-    setIsNewCvFile(false);
-  }, [cvFile, uploadFile, setIsNewCvFile]);
-
-  const handleChange = useCallback(
-    (value, attribute) => {
-      let editedContent = { ...content };
-      editedContent[attribute] = value;
-      setContent(editedContent);
-    },
-    [content, setContent]
-  );
-
-  const handleFileSelection = useCallback(
-    (e) => {
-      let newCvFile = {};
-      const target = e.target;
-      const files = target.files;
-      const [file] = files;
-      if (file) {
-        newCvFile = {
-          url: URL.createObjectURL(file),
-          newFile: file,
-        };
-      }
-      setCvFile(newCvFile);
-      setIsNewCvFile(true);
-    },
-    [cvFile, setCvFile]
   );
 
   const getDialogContent = () => {

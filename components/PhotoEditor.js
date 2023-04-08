@@ -36,14 +36,18 @@ export default function PhotoEditor(props) {
     if (!image.fileName) {
       getContent(setFileName);
     }
-    if (image.fileName) {
-      getFile(image.fileName).then((imageURL) => {
-        setImage({
-          url: imageURL,
-          newFile: null,
-        });
-      });
+    if (image.fileName && !image.url) {
+      getImage();
     }
+  }, [image, setImage]);
+
+  const getImage = useCallback(() => {
+    getFile(image.fileName).then((imageURL) => {
+      setImage({
+        url: imageURL,
+        newFile: null,
+      });
+    });
   }, [image, setImage]);
 
   const setFileName = useCallback(
@@ -57,9 +61,10 @@ export default function PhotoEditor(props) {
   );
 
   const handleFileUpload = useCallback(() => {
-    const path = "/curriculum_vitae.pdf";
-    uploadFile(path, image.newFile);
-    setIsNewFile(false);
+    console.log("upload clicked");
+    // const path = "/curriculum_vitae.pdf";
+    // uploadFile(path, image.newFile);
+    // setIsNewFile(false);
   }, [image, uploadFile, setIsNewFile]);
 
   const handleFileSelection = useCallback(
@@ -74,7 +79,7 @@ export default function PhotoEditor(props) {
           newFile: file,
         };
       }
-      setPdf(selectedFile);
+      setImage(selectedFile);
       setIsNewFile(true);
     },
     [image, setImage]
@@ -96,9 +101,25 @@ export default function PhotoEditor(props) {
     {
       icon: <FileUploadIcon color="tertiary" fontSize="small" />,
       name: "Upload",
+      input: (
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={handleFileSelection}
+        />
+      ),
     },
-    { icon: <ClearIcon color="tertiary" fontSize="small" />, name: "Discard" },
-    { icon: <SaveIcon color="tertiary" fontSize="small" />, name: "Save" },
+    {
+      icon: <ClearIcon color="tertiary" fontSize="small" />,
+      name: "Discard",
+      onClick: getImage,
+    },
+    {
+      icon: <SaveIcon color="tertiary" fontSize="small" />,
+      name: "Save",
+      onClick: handleFileUpload,
+    },
   ];
 
   return (
@@ -133,7 +154,12 @@ export default function PhotoEditor(props) {
               sx={{ backgroundColor: "primary.main", color: "tertiary.main" }}
             >
               {actions.map((action) => (
-                <MenuItem key={action.name}>
+                <MenuItem
+                  key={action.name}
+                  component="label"
+                  onClick={action.onClick ? action.onClick : null}
+                >
+                  {action.input ? action.input : <></>}
                   <ListItemIcon>{action.icon}</ListItemIcon>
                   <ListItemText>{action.name}</ListItemText>
                 </MenuItem>
