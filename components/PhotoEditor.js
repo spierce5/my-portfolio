@@ -12,8 +12,15 @@ import {
   Paper,
   Slider,
   Divider,
+  Alert,
+  Collapse,
 } from "@mui/material";
-import { uploadFile, getFile, getContent } from "../firebase/firebase.js";
+import {
+  uploadFile,
+  updateContent,
+  getFile,
+  getContent,
+} from "../firebase/firebase.js";
 import ImageCropper from "../components/ImageCropper";
 import SaveIcon from "@mui/icons-material/Save";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -21,16 +28,19 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 export default function PhotoEditor(props) {
   const theme = useTheme();
+  const [alertIsOpen, setAlertIsOpen] = useState(true);
   const [image, setImage] = useState({
     fileName: null,
     url: "",
     newFile: null,
   });
+  const [editedImage, setEditedImage] = useState(null);
   const [isNewFile, setIsNewFile] = useState(false);
   const [controls, setControls] = useState({
     zoom: 1,
     rotation: 0,
   });
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!image.fileName) {
@@ -62,10 +72,26 @@ export default function PhotoEditor(props) {
 
   const handleFileUpload = useCallback(() => {
     console.log("upload clicked");
+    console.log(editedImage);
     // const path = "/curriculum_vitae.pdf";
     // uploadFile(path, image.newFile);
     // setIsNewFile(false);
-  }, [image, uploadFile, setIsNewFile]);
+    const date = new Date();
+    const dateSuffix =
+      date.getFullYear().toString() +
+      (date.getMonth() < 9
+        ? "0" + (date.getMonth() + 1).toString()
+        : (date.getMonth() + 1).toString()) +
+      date.getDate().toString();
+    console.log(dateSuffix);
+
+    const path = image.fileName.replace(".", "_" + dateSuffix + ".");
+    uploadFile(path, editedImage.newFile);
+    const contentPath = "images/" + props.reference + "/file_name";
+    updateContent(contentPath, "final", path);
+    setIsNewFile(false);
+    setImage(editedImage);
+  }, [image, uploadFile, setIsNewFile, editedImage]);
 
   const handleFileSelection = useCallback(
     (e) => {
@@ -75,9 +101,11 @@ export default function PhotoEditor(props) {
       const [file] = files;
       if (file) {
         selectedFile = {
+          fileName: file.name,
           url: URL.createObjectURL(file),
           newFile: file,
         };
+        console.log(file);
       }
       setImage(selectedFile);
       setIsNewFile(true);
@@ -130,25 +158,6 @@ export default function PhotoEditor(props) {
           <Typography variant="h5" className="mb-8">
             {props.title}
           </Typography>
-
-          <Stack className="hidden" direction="row" spacing={1}>
-            <Button component="label" variant="outlined">
-              Upload
-              <input
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={handleFileSelection}
-              />
-            </Button>
-            <Button
-              name={props.reference}
-              onClick={handleFileUpload}
-              variant="outlined"
-            >
-              Publish
-            </Button>
-          </Stack>
           <Paper sx={{ width: 320, maxWidth: "100%" }}>
             <MenuList
               sx={{ backgroundColor: "primary.main", color: "tertiary.main" }}
@@ -171,6 +180,7 @@ export default function PhotoEditor(props) {
                 </Typography>
                 <Slider
                   name="zoom"
+                  disabled={!isNewFile}
                   className=""
                   color="tertiary"
                   defaultValue={0}
@@ -193,6 +203,7 @@ export default function PhotoEditor(props) {
                 </Typography>
                 <Slider
                   name="rotation"
+                  disabled={!isNewFile}
                   className=""
                   color="tertiary"
                   defaultValue={0}
@@ -208,13 +219,39 @@ export default function PhotoEditor(props) {
           </Paper>
         </Stack>
         <div className="flex flex-row justify-center items-center space-y-28 md:space-y-12 w-full h-full">
-          <ImageCropper
-            src={image.url}
-            controls={controls}
-            handleZoom={handleSlide}
-          />
+          {(isNewFile && (
+            <ImageCropper
+              src={image.url}
+              controls={controls}
+              crop={crop}
+              setCrop={setCrop}
+              handleZoom={handleSlide}
+              setImage={setEditedImage}
+            />
+          )) || <img width="450px" height="750px" src={image.url} alt=""></img>}
         </div>
       </div>
+      <Collapse
+        in={alertIsOpen}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2"
+      >
+        <Alert
+          severity="info"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => setAlertIsOpen(false)}
+            >
+              Dismiss
+            </Button>
+          }
+        >
+          To use the image editor, you must upload a new image. If you would
+          like to edit the current published image, you will need to reupload a
+          copy.
+        </Alert>
+      </Collapse>
     </Container>
   );
 }
