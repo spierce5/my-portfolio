@@ -24,6 +24,7 @@ import ImageCropper from "../components/ImageCropper";
 import ContentEditor from "../components/ContentEditor";
 import PDFEditor from "../components/PDFEditor";
 import PhotoEditor from "../components/PhotoEditor";
+import ContactForm from "../components/ContactForm";
 import CloseIcon from "@mui/icons-material/Close";
 import { IntegrationInstructionsRounded } from "@mui/icons-material";
 
@@ -68,6 +69,12 @@ export default function Editor({ serverSideProps }) {
       reference: "curriculum_vitae",
       pdf: serverSideProps.curriculum_vitae,
       type: "pdf",
+    },
+    contact: {
+      title: "Contact",
+      reference: "contact",
+      content: serverSideProps.contact,
+      type: "contact-form",
     },
     biography_image: {
       title: "Biography Page Image",
@@ -123,6 +130,14 @@ export default function Editor({ serverSideProps }) {
           <PhotoEditor
             title={currentDialog.title}
             reference={currentDialog.reference}
+          />
+        );
+      case "contact-form":
+        return (
+          <ContactForm
+            title={currentDialog.title}
+            reference={currentDialog.reference}
+            content={currentDialog.content}
           />
         );
       default:
