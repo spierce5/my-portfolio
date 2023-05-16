@@ -228,7 +228,9 @@ export default function PhotoEditor(props) {
               handleZoom={handleSlide}
               setImage={setEditedImage}
             />
-          )) || <img width="450px" height="750px" src={image.url} alt=""></img>}
+          )) || (
+            <img width="450px" height="750px" src={image.url} alt=" "></img>
+          )}
         </div>
       </div>
       <Collapse

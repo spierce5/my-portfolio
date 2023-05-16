@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import { getContent, getContentOnce } from "../firebase/firebase.js";
+import { getContentOnce, getFile } from "../firebase/firebase.js";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
 
@@ -8,9 +8,18 @@ import { Container } from "@mui/material";
 
 export async function getServerSideProps() {
   const data = await getContentOnce();
-  const researchInterests = (({ research_interests }) => ({
+  let researchInterests = (({ research_interests }) => ({
     research_interests: research_interests.published,
   }))(data);
+
+  const imgFileName = (({ images }) => ({
+    name: images.research_interests_image.file_name,
+  }))(data);
+
+  const imgSrc = await getFile(imgFileName.name);
+
+  researchInterests = { ...researchInterests, src: imgSrc };
+
   return {
     props: {
       serverSideProps: researchInterests,
@@ -25,13 +34,14 @@ export default function ResearchInterest({ serverSideProps }) {
         <title>N. Wensel|Research Interest</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <main>
+      <main className="flex flex-row">
         <article
           className="prose lg:prose-xl"
           dangerouslySetInnerHTML={{
             __html: serverSideProps.research_interests,
           }}
         />
+        <img src={serverSideProps.src} alt=" "></img>
       </main>
     </Container>
   );
