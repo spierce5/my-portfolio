@@ -63,7 +63,7 @@ export const getContentOnce = async () => {
     });
 };
 
-export const updateContent = (path, version, value) => {
+export const updateContent = async (path, version, value) => {
   let reference = ref(db, "content/");
   if (version === "draft") {
     value["draft_last_saved"] = Date();
@@ -72,7 +72,7 @@ export const updateContent = (path, version, value) => {
     [path]: value,
   };
 
-  update(reference, updatedContent)
+  await update(reference, updatedContent)
     .then(() => {
       console.log("Content updated successfully");
     })

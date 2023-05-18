@@ -44,28 +44,32 @@ export default function Contact({ serverSideProps }) {
         <div className="flex flex-col">
           <Typography variant="h6">Contact</Typography>
           <List>
-            {serverSideProps.email_list.map((entry) => (
-              <ListItem key={entry.order}>
-                <ListItemButton href={"mailto:" + entry.email}>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{entry.email}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {serverSideProps.email_list
+              .sort((a, b) => a.order > b.order)
+              .map((entry) => (
+                <ListItem key={entry.value}>
+                  <ListItemButton href={"mailto:" + entry.value}>
+                    <ListItemIcon>
+                      <EmailIcon />
+                    </ListItemIcon>
+                    <ListItemText>{entry.value}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
           </List>
           <List>
-            {serverSideProps.phone_list.map((entry) => (
-              <ListItem key={entry.order}>
-                <ListItemButton href={"tel:" + entry.phone_number}>
-                  <ListItemIcon>
-                    <PhoneEnabledIcon />
-                  </ListItemIcon>
-                  <ListItemText>{entry.phone_number}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {serverSideProps.phone_list
+              .sort((a, b) => a.order > b.order)
+              .map((entry) => (
+                <ListItem key={entry.value}>
+                  <ListItemButton href={"tel:" + entry.value}>
+                    <ListItemIcon>
+                      <PhoneEnabledIcon />
+                    </ListItemIcon>
+                    <ListItemText>{entry.value}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
           </List>
         </div>
         <img src={serverSideProps.src} alt=" " />
