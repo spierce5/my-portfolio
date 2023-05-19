@@ -16,7 +16,10 @@ import { getContentOnce, getFile } from "../firebase/firebase.js";
 
 export async function getServerSideProps() {
   const data = await getContentOnce();
-  let contact = data.contact;
+  let contact = JSON.parse(JSON.stringify(data.contact));
+
+  contact.email_list.sort((a, b) => a.order - b.order);
+  contact.phone_list.sort((a, b) => a.order - b.order);
 
   const imgFileName = (({ images }) => ({
     name: images.contact_image.file_name,
@@ -42,34 +45,32 @@ export default function Contact({ serverSideProps }) {
       </Head>
       <main className="flex flex-row">
         <div className="flex flex-col">
-          <Typography variant="h6">Contact</Typography>
+          <article className="prose lg:prose-xl">
+            <h1>Contact</h1>
+          </article>
           <List>
-            {serverSideProps.email_list
-              .sort((a, b) => a.order > b.order)
-              .map((entry) => (
-                <ListItem key={entry.value}>
-                  <ListItemButton href={"mailto:" + entry.value}>
-                    <ListItemIcon>
-                      <EmailIcon />
-                    </ListItemIcon>
-                    <ListItemText>{entry.value}</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              ))}
+            {serverSideProps.email_list.map((entry) => (
+              <ListItem key={entry.value}>
+                <ListItemButton href={"mailto:" + entry.value}>
+                  <ListItemIcon>
+                    <EmailIcon />
+                  </ListItemIcon>
+                  <ListItemText>{entry.value}</ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
           <List>
-            {serverSideProps.phone_list
-              .sort((a, b) => a.order > b.order)
-              .map((entry) => (
-                <ListItem key={entry.value}>
-                  <ListItemButton href={"tel:" + entry.value}>
-                    <ListItemIcon>
-                      <PhoneEnabledIcon />
-                    </ListItemIcon>
-                    <ListItemText>{entry.value}</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              ))}
+            {serverSideProps.phone_list.map((entry) => (
+              <ListItem key={entry.value}>
+                <ListItemButton href={"tel:" + entry.value}>
+                  <ListItemIcon>
+                    <PhoneEnabledIcon />
+                  </ListItemIcon>
+                  <ListItemText>{entry.value}</ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
         </div>
         <img src={serverSideProps.src} alt=" " />

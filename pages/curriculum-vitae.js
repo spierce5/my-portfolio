@@ -25,7 +25,9 @@ export default function CurriculumVitae({ serverSideProps }) {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <h1>Curriculum Vitae</h1>
+        <article className="prose lg:prose-xl">
+          <h1>Curriculum Vitae</h1>
+        </article>
         {/* <img src="demo-files/Capture.PNG" alt="" /> */}
         <object
           data={serverSideProps.curriculum_vitae}

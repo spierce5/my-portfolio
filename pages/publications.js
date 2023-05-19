@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
 
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export default function Publications() {
   return (
@@ -12,7 +12,9 @@ export default function Publications() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main>
-        <h1>Publications</h1>
+        <article className="prose lg:prose-xl">
+          <h1>Publications</h1>
+        </article>
       </main>
     </Container>
   );
