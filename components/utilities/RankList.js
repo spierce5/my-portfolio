@@ -103,9 +103,16 @@ export default function RankList(props) {
 
   const removeEntry = useCallback(
     (valueToRemove) => {
-      const idx = list.findIndex((listValue) => listValue === valueToRemove);
+      const idx = list.findIndex(
+        (listObject) => listObject.value === valueToRemove
+      );
       let updatedList = JSON.parse(JSON.stringify(list));
-      updatedList.splice(idx, 1);
+      const removedObj = updatedList.splice(idx, 1)[0];
+      updatedList.forEach((listObj) => {
+        if (listObj.order > removedObj.order) {
+          listObj.order -= 1;
+        }
+      });
 
       updateContent("contact/" + props.listType, "final", updatedList);
     },
@@ -120,7 +127,6 @@ export default function RankList(props) {
     if (order > 1) {
       let currentIdx = list.findIndex((a) => a.order === order);
       let destinationIdx = list.findIndex((b) => b.order === order - 1);
-
       let updatedList = JSON.parse(JSON.stringify(list));
       updatedList[currentIdx]["order"] = order - 1;
       updatedList[destinationIdx]["order"] = order;
@@ -143,6 +149,7 @@ export default function RankList(props) {
   return (
     <List
       dense={true}
+      className="h-[270px]"
       sx={{
         width: "100%",
         maxWidth: 360,
@@ -150,6 +157,33 @@ export default function RankList(props) {
         overflow: "auto",
       }}
     >
+      <ListItem
+        key={list ? list.reduce((a, b) => Math.max(a, b.order), 0) + 1 : 1}
+        dense={true}
+        disableGutters={true}
+      >
+        <TextField
+          size="small"
+          value={newValue}
+          onChange={handleChange}
+          type={inputType}
+          error={!isValid}
+          helperText={
+            inputType === "email"
+              ? "E.g. example@domain.com"
+              : "E.g. (xxx) xxx-xxxx"
+          }
+        />
+        <IconButton
+          disabled={newValue.length < 1}
+          disableFocusRipple={true}
+          disableRipple={true}
+          onClick={addEntry}
+          className=" absolute top-0 right-6 pr-4 pt-2"
+        >
+          <AddIcon fontSize="large" />
+        </IconButton>
+      </ListItem>
       {list &&
         list.length > 0 &&
         list
@@ -175,29 +209,6 @@ export default function RankList(props) {
               <ListItemText primary={entry.value} />
             </ListItem>
           ))}
-      <ListItem
-        key={list ? list.reduce((a, b) => Math.max(a, b.order), 0) + 1 : 1}
-        dense={true}
-        disableGutters={true}
-        secondaryAction={
-          <IconButton disabled={newValue.length < 1} onClick={addEntry}>
-            <AddIcon />
-          </IconButton>
-        }
-      >
-        <TextField
-          size="small"
-          value={newValue}
-          onChange={handleChange}
-          type={inputType}
-          error={!isValid}
-          helperText={
-            inputType === "email"
-              ? "E.g. example@domain.com"
-              : "E.g. (xxx) xxx-xxxx"
-          }
-        />
-      </ListItem>
     </List>
   );
 }

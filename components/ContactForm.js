@@ -33,8 +33,10 @@ export default function ContactForm(props) {
 
   return (
     <Container className="h-screen">
-      <Stack spacing={1} className="h-full">
-        <Typography variant="h3">{props.title}</Typography>
+      <Typography variant="h3" className="mb-12">
+        {props.title}
+      </Typography>
+      <Stack spacing={1} className="min-h-fit">
         <Typography variant="h6">Email</Typography>
         <RankList
           list={content ? content.email_list : []}
