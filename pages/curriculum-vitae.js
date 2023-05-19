@@ -19,7 +19,7 @@ export async function getServerSideProps() {
 
 export default function CurriculumVitae({ serverSideProps }) {
   return (
-    <Container maxWidth="false" disableGutters={true}>
+    <Container disableGutters={false}>
       <Head>
         <title>N. Wensel|Curriculum Vitae</title>
         <link rel="icon" href="/bookmark-book.ico" />
