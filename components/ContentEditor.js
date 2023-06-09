@@ -4,7 +4,10 @@ import { Stack, Button, Typography, Container } from "@mui/material";
 import { updateContent, getContent } from "../firebase/firebase.js";
 
 export default function ContentEditor(props) {
-  const [content, setContent] = useState(props.content);
+  const [content, setContent] = useState({
+    biography: "",
+    research_interests: "",
+  });
 
   useEffect(() => {
     getContent(setCurrentContent);

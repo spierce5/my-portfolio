@@ -25,15 +25,27 @@ import ContentEditor from "../components/ContentEditor";
 import PDFEditor from "../components/PDFEditor";
 import PhotoEditor from "../components/PhotoEditor";
 import ContactForm from "../components/ContactForm";
+import PublicationUploader from "../components/PublicationUploader";
 import CloseIcon from "@mui/icons-material/Close";
 import { IntegrationInstructionsRounded } from "@mui/icons-material";
 
 export async function getServerSideProps() {
-  const content = await getContentOnce();
-  const cvFile = await getFile("curriculum_vitae.pdf");
+  // const content = await getContentOnce();
+  // const cvFile = await getFile("curriculum_vitae.pdf");
+  // const data = {
+  //   curriculum_vitae: cvFile,
+  //   ...content,
+  // };
+
+  // No Wifi - page will not load without data
   const data = {
-    curriculum_vitae: cvFile,
-    ...content,
+    curriculum_vitae: "demo_files/demo_pub_1.pdf",
+    publications: ["demo_files/demo_pub_1.pdf", "demo_files/demo_pub_2.pdf"],
+    content: {
+      biography: "<p>Hello World</p>",
+      research_interests: "<p>Hello Mars</p>",
+      contact: "<p>Hello Jupiter</p>",
+    },
   };
 
   return {
@@ -57,6 +69,12 @@ export default function Editor({ serverSideProps }) {
       reference: "biography",
       content: content.biography,
       type: "richtext",
+    },
+    publications: {
+      title: "Publications",
+      reference: "publications",
+      file: serverSideProps.publications,
+      type: "file",
     },
     research_interests: {
       title: "Research Interests Content",
@@ -122,6 +140,14 @@ export default function Editor({ serverSideProps }) {
           <PDFEditor
             title={currentDialog.title}
             pdf={currentDialog.pdf}
+            reference={currentDialog.reference}
+          />
+        );
+      case "file":
+        return (
+          <PublicationUploader
+            title={currentDialog.title}
+            file={currentDialog.file}
             reference={currentDialog.reference}
           />
         );
