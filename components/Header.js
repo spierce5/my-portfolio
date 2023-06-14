@@ -1,13 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
-import {
-  AppBar as MUIAppBar,
-  Stack,
-  Link,
-  Button,
-  Divider,
-} from "@mui/material";
+import { IconButton, Stack, Link, Button, Divider } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import SwipeableDrawer from "./SwipeableDrawer";
 
 const getPageName = () => {
   const router = useRouter();
@@ -20,92 +15,33 @@ const getPageName = () => {
   return pageName;
 };
 
-const VerticalDivider = () => (
-  <Divider
-    orientation="vertical"
-    variant="middle"
-    style={{ height: "2em", width: "4px" }}
-  />
-);
-
 export default function Header() {
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+  const handleOpen = useCallback(() => {
+    setDrawerIsOpen(true);
+  }, [setDrawerIsOpen]);
+
+  const handleClose = useCallback(() => {
+    setDrawerIsOpen(false);
+  }, [setDrawerIsOpen]);
+
   return (
-    <Stack
-      className="flex-col justify-center md:flex-row md:justify-end md:pt-12 md:pr-16"
-      style={{ position: "sticky" }}
-      sx={{}}
-    >
-      <Link
-        href="/"
-        component={Button}
-        variant="h5"
-        underline="none"
-        className={
-          getPageName() === "bio" ? "border-b-4 border-black border-solid" : ""
-        }
+    <>
+      <IconButton
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 2 }}
+        onClick={handleOpen}
+        className="text-2xl"
       >
-        Bio
-      </Link>
-      <Divider
-        orientation="vertical"
-        variant="middle"
-        sx={{ height: "2em", width: "4px" }}
+        <MenuIcon fontSize="large" />
+      </IconButton>
+      <SwipeableDrawer
+        isOpen={drawerIsOpen}
+        onOpen={handleOpen}
+        onClose={handleClose}
       />
-      <Link
-        href="/publications"
-        component={Button}
-        variant="h5"
-        underline="none"
-        className={
-          getPageName() === "publications"
-            ? "border-b-4 border-black border-solid"
-            : ""
-        }
-      >
-        Publications
-      </Link>
-      <VerticalDivider />
-      <Link
-        href="/research-interests"
-        component={Button}
-        variant="h5"
-        underline="none"
-        className={
-          getPageName() === "research-interests"
-            ? "border-b-4 border-black border-solid"
-            : ""
-        }
-      >
-        Research Interests
-      </Link>
-      <VerticalDivider />
-      <Link
-        href="/curriculum-vitae"
-        component={Button}
-        variant="h5"
-        underline="none"
-        className={
-          getPageName() === "curriculum-vitae"
-            ? "border-b-4 border-black border-solid"
-            : ""
-        }
-      >
-        Curriculum Vitae
-      </Link>
-      <VerticalDivider />
-      <Link
-        href="/contact"
-        component={Button}
-        variant="h5"
-        underline="none"
-        className={
-          getPageName() === "contact"
-            ? "border-b-4 border-black border-solid"
-            : ""
-        }
-      >
-        Contact
-      </Link>
-    </Stack>
+    </>
   );
 }

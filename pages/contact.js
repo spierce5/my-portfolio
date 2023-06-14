@@ -1,6 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import SchoolIcon from "@mui/icons-material/School";
 import {
   Typography,
   Container,
@@ -12,35 +10,36 @@ import {
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
-import { getContentOnce, getFile } from "../firebase/firebase.js";
 
-export async function getServerSideProps() {
-  const data = await getContentOnce();
-  let contact = JSON.parse(JSON.stringify(data.contact));
+export default function Contact() {
+  const contactList = [
+    {
+      type: "email",
+      value: "sam.pierce76@gmail.com",
+      text: "sam.pierce76@gmail.com",
+    },
+    {
+      type: "phone",
+      value: "4024059977",
+      text: "(402) 405-9977",
+    },
+  ];
 
-  contact.email_list.sort((a, b) => a.order - b.order);
-  contact.phone_list.sort((a, b) => a.order - b.order);
-
-  const imgFileName = (({ images }) => ({
-    name: images.contact_image.file_name,
-  }))(data);
-
-  const imgSrc = await getFile(imgFileName.name);
-
-  contact = { ...contact, src: imgSrc };
-
-  return {
-    props: {
-      serverSideProps: contact,
+  const typeProperties = {
+    email: {
+      icon: EmailIcon,
+      prefix: "mailto:",
+    },
+    phone: {
+      icon: PhoneEnabledIcon,
+      prefix: "tel:",
     },
   };
-}
 
-export default function Contact({ serverSideProps }) {
   return (
     <Container>
       <Head>
-        <title>N. Wensel|Research Interest</title>
+        <title>S. Pierce | Contact</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <main className="flex flex-row">
@@ -49,31 +48,20 @@ export default function Contact({ serverSideProps }) {
             <h1>Contact</h1>
           </article>
           <List>
-            {serverSideProps.email_list.map((entry) => (
+            {contactList.map((entry) => (
               <ListItem key={entry.value}>
-                <ListItemButton href={"mailto:" + entry.value}>
+                <ListItemButton
+                  href={`${typeProperties[entry.type].prefix}${entry.value}`}
+                >
                   <ListItemIcon>
                     <EmailIcon />
                   </ListItemIcon>
-                  <ListItemText>{entry.value}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <List>
-            {serverSideProps.phone_list.map((entry) => (
-              <ListItem key={entry.value}>
-                <ListItemButton href={"tel:" + entry.value}>
-                  <ListItemIcon>
-                    <PhoneEnabledIcon />
-                  </ListItemIcon>
-                  <ListItemText>{entry.value}</ListItemText>
+                  <ListItemText>{entry.text}</ListItemText>
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
         </div>
-        <img src={serverSideProps.src} alt=" " />
       </main>
     </Container>
   );

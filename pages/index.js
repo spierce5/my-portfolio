@@ -4,47 +4,17 @@ import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
-import { getContentOnce, getFile } from "../firebase/firebase.js";
 
 import { Container, Typography } from "@mui/material";
 
-export async function getServerSideProps() {
-  const data = await getContentOnce();
-  let biography = (({ biography }) => ({ biography: biography.published }))(
-    data
-  );
-
-  const imgFileName = (({ images }) => ({
-    name: images.biography_image.file_name,
-  }))(data);
-
-  const imgSrc = await getFile(imgFileName.name);
-
-  biography = { ...biography, src: imgSrc };
-
-  return {
-    props: {
-      serverSideProps: biography,
-    },
-  };
-}
-
-export default function Home({ serverSideProps }) {
+export default function Home() {
   return (
     <Container disableGutters={true}>
       <Head>
-        <title>Nicholas Wensel Bio</title>
+        <title>S. Pierce Portfolio</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <main className="flex flex-row">
-        <article
-          className="prose lg:prose-xl"
-          dangerouslySetInnerHTML={{
-            __html: serverSideProps.biography,
-          }}
-        ></article>
-        <img src={serverSideProps.src} alt=" "></img>
-      </main>
+      <main className="flex flex-row"></main>
     </Container>
   );
 }

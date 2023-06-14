@@ -1,11 +1,9 @@
 import "react-toastify/dist/ReactToastify.css";
-import "react-quill/dist/quill.snow.css";
 import "../styles/globals.css";
 import Layout from "../components/layout";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { Work_Sans, Bilbo } from "@next/font/google";
-// import * as gtag from "../lib/gtag";
 import { AnimatePresence } from "framer-motion";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Analytics } from "@vercel/analytics/react";
@@ -43,15 +41,7 @@ const theme = createTheme({
 });
 
 function MyApp({ Component, pageProps, router }) {
-  useEffect(() => {
-    // const handleRouteChange = (url) => {
-    //   gtag.pageview(url);
-    // };
-    // router.events.on("routeChangeComplete", handleRouteChange);
-    // return () => {
-    //   router.events.off("routeChangeComplete", handleRouteChange);
-    // };
-  }, [router.events]);
+  useEffect(() => {}, [router.events]);
 
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
 
