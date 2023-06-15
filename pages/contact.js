@@ -7,6 +7,7 @@ import {
   ListItemText,
   ListItemIcon,
   ListItemButton,
+  Divider,
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
@@ -27,42 +28,47 @@ export default function Contact() {
 
   const typeProperties = {
     email: {
-      icon: EmailIcon,
+      icon: <EmailIcon />,
       prefix: "mailto:",
     },
     phone: {
-      icon: PhoneEnabledIcon,
+      icon: <PhoneEnabledIcon />,
       prefix: "tel:",
     },
   };
 
   return (
-    <Container>
+    <>
       <Head>
         <title>S. Pierce | Contact</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <main className="flex flex-row">
-        <div className="flex flex-col">
-          <article className="prose lg:prose-xl">
-            <h1>Contact</h1>
-          </article>
-          <List>
-            {contactList.map((entry) => (
-              <ListItem key={entry.value}>
-                <ListItemButton
-                  href={`${typeProperties[entry.type].prefix}${entry.value}`}
-                >
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{entry.text}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      </main>
-    </Container>
+      <Container>
+        <main className="flex flex-row">
+          <div className="flex flex-col">
+            <Typography variant="h3">Contact</Typography>
+            <List>
+              {contactList.map((entry) => (
+                <>
+                  <ListItem key={entry.value}>
+                    <ListItemButton
+                      href={`${typeProperties[entry.type].prefix}${
+                        entry.value
+                      }`}
+                    >
+                      <ListItemIcon>
+                        {typeProperties[entry.type].icon}
+                      </ListItemIcon>
+                      <ListItemText>{entry.text}</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <Divider />
+                </>
+              ))}
+            </List>
+          </div>
+        </main>
+      </Container>
+    </>
   );
 }
