@@ -11,8 +11,12 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      opt1: "#e88873",
+      opt2: "#a37774",
+      opt3: "#5c6d70",
+      opt4: "#484a47",
+    },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };

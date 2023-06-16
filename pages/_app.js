@@ -37,6 +37,27 @@ const theme = createTheme({
     tertiary: {
       main: "#ffffff",
     },
+    neutral: {
+      main: "#f4b266",
+    },
+    opt1: {
+      main: "#e88873",
+    },
+    opt2: {
+      main: "#06d6a0",
+    },
+    opt3: {
+      main: "#91adc2",
+    },
+    opt4: {
+      main: "#a9ddd6",
+    },
+    opt5: {
+      main: "#8a89c0",
+    },
+    opt6: {
+      main: "#3e2f5b",
+    },
   },
 });
 
