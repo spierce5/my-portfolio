@@ -4,9 +4,23 @@ import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
-import { Container, Typography, Chip } from "@mui/material";
+import { Container, Typography, Chip, Button } from "@mui/material";
+import ProjectCard from "../components/ProjectCard";
 
-export default function Home() {
+export const getServerSideProps = async () => {
+  const res = await fetch("https://api.github.com/users/spierce5/repos");
+  let repos = await res.json();
+  const featuredProjects = ["vehicle-maintenance", "task-organizer"];
+  repos = repos.filter((repo) => featuredProjects.includes(repo.name));
+
+  return {
+    props: {
+      repos,
+    },
+  };
+};
+
+export default function Home({ repos }) {
   const competencies = {
     libsFrams: [
       "React",
@@ -45,62 +59,89 @@ export default function Home() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <Container className="" disableGutters={false}>
-        <div className="flex flex-col min-h-screen items-center z-10">
-          <div className="flex flex-row justify-between items-center ">
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">Samuel Pierce.</div>
-              <div className="text-xl">Web Developer.</div>
+        <div className="flex flex-col min-h-screen items-center z-10 space-y-24">
+          <div id="intro" className="space-y-12 h-screen flex flex-col">
+            <div className="flex flex-row justify-between items-center ">
+              <div className="flex flex-col">
+                <div className="text-2xl font-bold">Samuel Pierce.</div>
+                <div className="text-xl">Web Developer.</div>
+              </div>
+              <img
+                id="me-img"
+                src="/images/me.jpg"
+                alt="me.jpg"
+                className="h-48 w-48 scale-50 aspect-square rounded-full object-cover shadow-lg self-end z-20"
+              />
             </div>
-            <img
-              id="me-img"
-              src="/images/me.jpg"
-              alt="me.jpg"
-              className="h-48 w-48 scale-50 aspect-square rounded-full object-cover shadow-lg self-end z-20"
-            />
+            <Typography variant="h6" className="text-center">
+              Thanks for checking out my portfolio. Take a look around and reach
+              out to get to know me! You can reach me with any of the methods
+              listed on my contact page.
+            </Typography>
+            {/* TODO: make this nicer*/}
+            <Button href="#skills">down</Button>
           </div>
-          <div className="space-y-2 flex flex-col items-center text-center">
-            <div>
-              <Typography variant="h5">Languages</Typography>
-              <div className="gap-1 flex flex-wrap justify-center">
-                {competencies.languages.map((lang) => (
-                  <Chip
-                    key={lang}
-                    label={lang}
-                    size="small"
-                    variant="outlined"
-                    sx={() => getChipColor()}
-                  />
-                ))}
+          <div id="skills" className="h-screen text-center space-y-12">
+            <Typography variant="h3">Skills</Typography>
+            <div className="space-y-2 flex flex-col items-center text-center">
+              <div>
+                <Typography variant="h5">Languages</Typography>
+                <div className="gap-1 flex flex-wrap justify-center">
+                  {competencies.languages.map((lang) => (
+                    <Chip
+                      key={lang}
+                      label={lang}
+                      size="small"
+                      variant="outlined"
+                      sx={() => getChipColor()}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Typography variant="h5">Libraries & Frameworks</Typography>
+                <div className="gap-1 flex flex-wrap justify-center">
+                  {competencies.libsFrams.map((libFram) => (
+                    <Chip
+                      key={libFram}
+                      label={libFram}
+                      size="small"
+                      variant="outlined"
+                      sx={() => getChipColor()}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Typography variant="h5">Markup & Styles</Typography>
+                <div className="gap-1 flex flex-wrap justify-center">
+                  {competencies.stylesMarkup.map((sM) => (
+                    <Chip
+                      key={sM}
+                      label={sM}
+                      size="small"
+                      variant="outlined"
+                      sx={() => getChipColor()}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-            <div>
-              <Typography variant="h5">Libraries & Frameworks</Typography>
-              <div className="gap-1 flex flex-wrap justify-center">
-                {competencies.libsFrams.map((libFram) => (
-                  <Chip
-                    key={libFram}
-                    label={libFram}
-                    size="small"
-                    variant="outlined"
-                    sx={() => getChipColor()}
-                  />
-                ))}
-              </div>
-            </div>
-            <div>
-              <Typography variant="h5">Markup & Styles</Typography>
-              <div className="gap-1 flex flex-wrap justify-center">
-                {competencies.stylesMarkup.map((sM) => (
-                  <Chip
-                    key={sM}
-                    label={sM}
-                    size="small"
-                    variant="outlined"
-                    sx={() => getChipColor()}
-                  />
-                ))}
-              </div>
-            </div>
+            <Button href="#featured-projects">down</Button>
+          </div>
+          <div
+            id="featured-projects"
+            className="h-screen space-y-12 text-center"
+          >
+            <Typography variant="h3">Featured Projects</Typography>
+            {repos.map((repo) => (
+              <ProjectCard
+                id={repo.id}
+                name={repo.name}
+                description={repo.description}
+                url={repo.html_url}
+              />
+            ))}
           </div>
         </div>
       </Container>

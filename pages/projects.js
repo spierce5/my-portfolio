@@ -17,8 +17,7 @@ import {
 export const getServerSideProps = async () => {
   const res = await fetch("https://api.github.com/users/spierce5/repos");
   let repos = await res.json();
-  // remove after designing
-  repos = repos.filter((repo) => repo.description != null);
+
   repos = repos.sort((a, b) => {
     return Date.parse(b.created_at) - Date.parse(a.created_at);
   });
