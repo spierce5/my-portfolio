@@ -39,4 +39,6 @@ ul {
 button {
   padding: 0.5rem 1rem;
   font-weight: bold;
+  background-color: unset;
+  color: unset;
 }

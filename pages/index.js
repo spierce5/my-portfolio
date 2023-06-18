@@ -58,41 +58,49 @@ export default function Home() {
               className="h-48 w-48 scale-50 aspect-square rounded-full object-cover shadow-lg self-end z-20"
             />
           </div>
-          <Typography variant="h5">Languages: </Typography>
-          <div className="gap-1 flex flex-wrap justify-center">
-            {competencies.languages.map((lang) => (
-              <Chip
-                key={lang}
-                label={lang}
-                size="small"
-                variant="outlined"
-                sx={() => getChipColor()}
-              />
-            ))}
-          </div>
-          <Typography variant="h5">Libraries & Frameworks: </Typography>
-          <div className="gap-1 flex flex-wrap justify-center">
-            {competencies.libsFrams.map((libFram) => (
-              <Chip
-                key={libFram}
-                label={libFram}
-                size="small"
-                variant="outlined"
-                sx={() => getChipColor()}
-              />
-            ))}
-          </div>
-          <Typography variant="h5">Markup & Styles: </Typography>
-          <div className="gap-1 flex flex-wrap justify-center">
-            {competencies.stylesMarkup.map((sM) => (
-              <Chip
-                key={sM}
-                label={sM}
-                size="small"
-                variant="outlined"
-                sx={() => getChipColor()}
-              />
-            ))}
+          <div className="space-y-2 flex flex-col items-center text-center">
+            <div>
+              <Typography variant="h5">Languages</Typography>
+              <div className="gap-1 flex flex-wrap justify-center">
+                {competencies.languages.map((lang) => (
+                  <Chip
+                    key={lang}
+                    label={lang}
+                    size="small"
+                    variant="outlined"
+                    sx={() => getChipColor()}
+                  />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Typography variant="h5">Libraries & Frameworks</Typography>
+              <div className="gap-1 flex flex-wrap justify-center">
+                {competencies.libsFrams.map((libFram) => (
+                  <Chip
+                    key={libFram}
+                    label={libFram}
+                    size="small"
+                    variant="outlined"
+                    sx={() => getChipColor()}
+                  />
+                ))}
+              </div>
+            </div>
+            <div>
+              <Typography variant="h5">Markup & Styles</Typography>
+              <div className="gap-1 flex flex-wrap justify-center">
+                {competencies.stylesMarkup.map((sM) => (
+                  <Chip
+                    key={sM}
+                    label={sM}
+                    size="small"
+                    variant="outlined"
+                    sx={() => getChipColor()}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </Container>

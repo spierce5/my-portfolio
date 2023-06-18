@@ -18,5 +18,8 @@ module.exports = {
       opt4: "#484a47",
     },
   },
+  corePlugins: {
+    preflight: false,
+  },
   plugins: [require("@tailwindcss/typography")],
 };

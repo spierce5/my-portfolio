@@ -4,10 +4,32 @@ import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
+import ProjectCard from "../components/ProjectCard";
 
-import { Container, Typography } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Card,
+  CardHeader,
+  CardContent,
+} from "@mui/material";
 
-export default function Projects() {
+export const getServerSideProps = async () => {
+  const res = await fetch("https://api.github.com/users/spierce5/repos");
+  let repos = await res.json();
+  // remove after designing
+  repos = repos.filter((repo) => repo.description != null);
+  repos = repos.sort((a, b) => {
+    return Date.parse(b.created_at) - Date.parse(a.created_at);
+  });
+  return {
+    props: {
+      repos,
+    },
+  };
+};
+
+export default function Projects({ repos }) {
   return (
     <>
       <Head>
@@ -15,7 +37,16 @@ export default function Projects() {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
       <Container disableGutters={false}>
-        <div class="flex flex-col w-full min-h-screen items-center z-10"></div>
+        <div className="flex flex-col w-full min-h-screen items-center z-10 space-y-12">
+          {repos.map((repo) => (
+            <ProjectCard
+              id={repo.id}
+              name={repo.name}
+              description={repo.description}
+              url={repo.html_url}
+            />
+          ))}
+        </div>
       </Container>
     </>
   );
