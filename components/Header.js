@@ -31,9 +31,9 @@ export default function Header() {
       <IconButton
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2 }}
+        sx={{ mr: 2, background: "white", borderRadius: "5px" }}
         onClick={handleOpen}
-        className="text-2xl"
+        className="text-2xl fixed top-2 left-2 z-40"
       >
         <MenuIcon fontSize="large" />
       </IconButton>

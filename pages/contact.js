@@ -43,7 +43,7 @@ export default function Contact() {
         <title>S. Pierce | Contact</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <Container>
+      <Container className="mt-16">
         <main className="flex flex-row">
           <div className="flex flex-col">
             <Typography variant="h3">Contact</Typography>

@@ -4,7 +4,9 @@ import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
-import { Container, Typography, Chip, Button } from "@mui/material";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
+import { Container, Typography, Chip, Button, IconButton } from "@mui/material";
 import ProjectCard from "../components/ProjectCard";
 
 export const getServerSideProps = async () => {
@@ -58,7 +60,7 @@ export default function Home({ repos }) {
         <title>S. Pierce Portfolio</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <Container className="" disableGutters={false}>
+      <Container className="mt-16" disableGutters={false}>
         <div className="flex flex-col min-h-screen items-center z-10 space-y-24">
           <div id="intro" className="space-y-12 h-screen flex flex-col">
             <div className="flex flex-row justify-between items-center ">
@@ -78,10 +80,17 @@ export default function Home({ repos }) {
               out to get to know me! You can reach me with any of the methods
               listed on my contact page.
             </Typography>
-            {/* TODO: make this nicer*/}
-            <Button href="#skills">down</Button>
+            <IconButton href="#skills">
+              <KeyboardDoubleArrowDownIcon fontSize="large" />
+            </IconButton>
           </div>
-          <div id="skills" className="h-screen text-center space-y-12">
+          <div
+            id="skills"
+            className="h-screen flex flex-col justify-center text-center space-y-12"
+          >
+            <IconButton href="#intro">
+              <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />
+            </IconButton>
             <Typography variant="h3">Skills</Typography>
             <div className="space-y-2 flex flex-col items-center text-center">
               <div>
@@ -92,8 +101,8 @@ export default function Home({ repos }) {
                       key={lang}
                       label={lang}
                       size="small"
-                      variant="outlined"
-                      sx={() => getChipColor()}
+                      variant="filled"
+                      color="primary"
                     />
                   ))}
                 </div>
@@ -106,8 +115,8 @@ export default function Home({ repos }) {
                       key={libFram}
                       label={libFram}
                       size="small"
-                      variant="outlined"
-                      sx={() => getChipColor()}
+                      variant="filled"
+                      color="primary"
                     />
                   ))}
                 </div>
@@ -120,19 +129,24 @@ export default function Home({ repos }) {
                       key={sM}
                       label={sM}
                       size="small"
-                      variant="outlined"
-                      sx={() => getChipColor()}
+                      variant="filled"
+                      color="primary"
                     />
                   ))}
                 </div>
               </div>
             </div>
-            <Button href="#featured-projects">down</Button>
+            <IconButton href="#featured-projects">
+              <KeyboardDoubleArrowDownIcon fontSize="large" />
+            </IconButton>
           </div>
           <div
             id="featured-projects"
-            className="h-screen space-y-12 text-center"
+            className="h-screen space-y-12 text-center flex flex-col justify-center"
           >
+            <IconButton href="#skills" className="justify-self-start">
+              <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />
+            </IconButton>
             <Typography variant="h3">Featured Projects</Typography>
             {repos.map((repo) => (
               <ProjectCard
@@ -142,6 +156,7 @@ export default function Home({ repos }) {
                 url={repo.html_url}
               />
             ))}
+            <Button href="/projects">See more</Button>
           </div>
         </div>
       </Container>
