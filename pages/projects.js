@@ -35,18 +35,16 @@ export default function Projects({ repos }) {
         <title>S. Pierce | Projects</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <Container disableGutters={false} className="mt-16">
-        <div className="flex flex-col w-full min-h-screen items-center z-10 space-y-12">
-          {repos.map((repo) => (
-            <ProjectCard
-              id={repo.id}
-              name={repo.name}
-              description={repo.description}
-              url={repo.html_url}
-            />
-          ))}
-        </div>
-      </Container>
+      <div className="flex flex-col w-full min-h-screen items-center z-10 space-y-12">
+        {repos.map((repo) => (
+          <ProjectCard
+            id={repo.id}
+            name={repo.name}
+            description={repo.description}
+            url={repo.html_url}
+          />
+        ))}
+      </div>
     </>
   );
 }
