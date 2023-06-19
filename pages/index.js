@@ -80,7 +80,7 @@ export default function Home({ repos }) {
               out to get to know me! You can reach me with any of the methods
               listed on my contact page.
             </Typography>
-            <IconButton href="#skills">
+            <IconButton href="#skills" className="animate-pulse">
               <KeyboardDoubleArrowDownIcon fontSize="large" />
             </IconButton>
           </div>
@@ -137,7 +137,10 @@ export default function Home({ repos }) {
               </div>
             </div>
             <IconButton href="#featured-projects">
-              <KeyboardDoubleArrowDownIcon fontSize="large" />
+              <KeyboardDoubleArrowDownIcon
+                fontSize="large"
+                className="animate-pulse"
+              />
             </IconButton>
           </div>
           <div
