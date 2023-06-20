@@ -27,13 +27,18 @@ export default function Header() {
   }, [setDrawerIsOpen]);
 
   return (
-    <>
+    <div className="z-10">
       <IconButton
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2, background: "white", borderRadius: "5px" }}
+        sx={{
+          mr: 2,
+          position: "fixed",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          borderRadius: "5px",
+        }}
         onClick={handleOpen}
-        className="text-2xl fixed top-2 left-2 z-40"
+        className="text-2xl  z-40"
       >
         <MenuIcon fontSize="large" />
       </IconButton>
@@ -42,6 +47,6 @@ export default function Header() {
         onOpen={handleOpen}
         onClose={handleClose}
       />
-    </>
+    </div>
   );
 }

@@ -61,10 +61,10 @@ export default function Home({ repos }) {
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
 
-      <div className="flex flex-col min-h-screen items-center z-10 space-y-24">
+      <div className="flex flex-col h-screen min-h-screen items-center z-10 space-y-24 snap-y snap-mandatory overflow-scroll scroll-smooth">
         <div
           id="intro"
-          className="space-y-12 h-screen flex flex-col justify-center items-center"
+          className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center"
         >
           <div className="flex flex-row justify-between items-center ">
             <div className="flex flex-col">
@@ -89,7 +89,7 @@ export default function Home({ repos }) {
         </div>
         <div
           id="skills"
-          className="h-screen flex flex-col justify-center items-center text-center space-y-4"
+          className="h-screen min-h-screen flex flex-col justify-center items-center text-center space-y-4 snap-always snap-center"
         >
           <IconButton href="#intro" className="max-w-fit">
             <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />
@@ -148,7 +148,7 @@ export default function Home({ repos }) {
         </div>
         <div
           id="featured-projects"
-          className="h-screen space-y-12 text-center flex flex-col justify-center items-center"
+          className="h-screen min-h-screen space-y-12 text-center flex flex-col justify-center items-center snap-always snap-center"
         >
           <IconButton href="#skills" className="justify-self-start max-w-fit">
             <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />

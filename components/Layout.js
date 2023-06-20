@@ -7,7 +7,6 @@ export default function Layout({ metas, children }) {
   return (
     <>
       <main style={{ width: "100vw" }}>
-        <Header />
         <Container
           maxWidth={false}
           sx={{
@@ -35,6 +34,7 @@ export default function Layout({ metas, children }) {
                 width: "100%",
               }}
             >
+              <Header />
               {children}
             </div>
           </div>

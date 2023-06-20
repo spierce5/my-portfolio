@@ -48,19 +48,14 @@ export default function Contact() {
           <Typography variant="h3">Contact</Typography>
           <List>
             {contactList.map((entry) => (
-              <>
-                <ListItem key={entry.value}>
-                  <ListItemButton
-                    href={`${typeProperties[entry.type].prefix}${entry.value}`}
-                  >
-                    <ListItemIcon>
-                      {typeProperties[entry.type].icon}
-                    </ListItemIcon>
-                    <ListItemText>{entry.text}</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-                <Divider />
-              </>
+              <ListItem key={entry.value} divider={true}>
+                <ListItemButton
+                  href={`${typeProperties[entry.type].prefix}${entry.value}`}
+                >
+                  <ListItemIcon>{typeProperties[entry.type].icon}</ListItemIcon>
+                  <ListItemText>{entry.text}</ListItemText>
+                </ListItemButton>
+              </ListItem>
             ))}
           </List>
         </div>
