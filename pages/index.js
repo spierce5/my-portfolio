@@ -66,17 +66,17 @@ export default function Home({ repos }) {
           id="intro"
           className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center"
         >
-          <div className="flex flex-row justify-between items-center ">
-            <div className="flex flex-col min-w-max">
-              <div className="text-2xl font-bold">Samuel Pierce.</div>
-              <div className="text-xl">Web Developer.</div>
-            </div>
+          <div className="flex flex-col justify-between items-center ">
             <img
               id="me-img"
               src="/images/me.jpg"
               alt="me.jpg"
               className="h-48 w-48 scale-50 aspect-square rounded-full object-cover shadow-lg self-end z-20"
             />
+            <div className="flex flex-col min-w-max text-center">
+              <div className="text-2xl font-bold">Samuel Pierce.</div>
+              <div className="text-xl">Web Developer.</div>
+            </div>
           </div>
           <Typography variant="h6" className="text-center">
             Thanks for taking the time to check out my portfolio. Take a look
@@ -150,10 +150,12 @@ export default function Home({ repos }) {
           id="featured-projects"
           className="h-screen min-h-screen space-y-12 text-center flex flex-col justify-center items-center snap-always snap-center"
         >
-          <IconButton href="#skills" className="justify-self-start max-w-fit">
-            <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />
-          </IconButton>
-          <Typography variant="h3">Featured Projects</Typography>
+          <div>
+            <IconButton href="#skills" className="justify-self-start max-w-fit">
+              <KeyboardDoubleArrowUpRoundedIcon fontSize="large" />
+            </IconButton>
+            <Typography variant="h3">Featured Projects</Typography>
+          </div>
           {repos.map((repo) => (
             <ProjectCard
               key={repo.id}
