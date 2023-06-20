@@ -43,22 +43,20 @@ export default function Contact() {
         <title>S. Pierce | Contact</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <div className="flex flex-row mt-16">
-        <div className="flex flex-col">
-          <Typography variant="h3">Contact</Typography>
-          <List>
-            {contactList.map((entry) => (
-              <ListItem key={entry.value} divider={true}>
-                <ListItemButton
-                  href={`${typeProperties[entry.type].prefix}${entry.value}`}
-                >
-                  <ListItemIcon>{typeProperties[entry.type].icon}</ListItemIcon>
-                  <ListItemText>{entry.text}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </div>
+      <div className="flex flex-col justify-center items-center min-h-full">
+        <Typography variant="h3">Contact</Typography>
+        <List>
+          {contactList.map((entry) => (
+            <ListItem key={entry.value} divider={true}>
+              <ListItemButton
+                href={`${typeProperties[entry.type].prefix}${entry.value}`}
+              >
+                <ListItemIcon>{typeProperties[entry.type].icon}</ListItemIcon>
+                <ListItemText>{entry.text}</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </div>
     </>
   );

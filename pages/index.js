@@ -67,7 +67,7 @@ export default function Home({ repos }) {
           className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center"
         >
           <div className="flex flex-row justify-between items-center ">
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-max">
               <div className="text-2xl font-bold">Samuel Pierce.</div>
               <div className="text-xl">Web Developer.</div>
             </div>
@@ -79,9 +79,9 @@ export default function Home({ repos }) {
             />
           </div>
           <Typography variant="h6" className="text-center">
-            Thanks for checking out my portfolio. Take a look around and reach
-            out to get to know me! You can reach me with any of the methods
-            listed on my contact page.
+            Thanks for taking the time to check out my portfolio. Take a look
+            around and reach out to get to know me! You can reach me with any of
+            the methods listed on my contact page.
           </Typography>
           <IconButton href="#skills" className="animate-pulse max-w-fit">
             <KeyboardDoubleArrowDownIcon fontSize="large" />
