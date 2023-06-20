@@ -8,8 +8,16 @@ export default function Layout({ metas, children }) {
     <>
       <main>
         <Header />
-        <Container className="mt-16" disableGutters={false}>
-          {children}
+        <Container className="" disableGutters={false}>
+          <div
+            className="w-full h-full pt-16"
+            style={{
+              borderLeft: "solid 5px rgba(0, 33, 99, 0.59)",
+              borderRight: "solid 5px rgba(0, 33, 99, 0.59)",
+            }}
+          >
+            {children}
+          </div>
         </Container>
       </main>
     </>
