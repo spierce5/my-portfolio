@@ -1,6 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { Work_Sans, Bilbo } from "@next/font/google";
@@ -47,7 +47,7 @@ const theme = createTheme({
       main: "#06d6a0",
     },
     opt3: {
-      main: "#91adc2",
+      main: "#697ca3",
     },
     opt4: {
       main: "#a9ddd6",

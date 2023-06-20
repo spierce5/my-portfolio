@@ -8,9 +8,9 @@ export default function Layout({ metas, children }) {
     <>
       <main>
         <Header />
-        <Container className="" disableGutters={false}>
+        <Container disableGutters={false}>
           <div
-            className="w-full h-full pt-16"
+            className="w-full h-full min-h-screen pt-16"
             style={{
               borderLeft: "solid 5px rgba(0, 33, 99, 0.59)",
               borderRight: "solid 5px rgba(0, 33, 99, 0.59)",

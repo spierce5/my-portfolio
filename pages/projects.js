@@ -38,6 +38,7 @@ export default function Projects({ repos }) {
       <div className="flex flex-col w-full min-h-screen items-center z-10 space-y-12">
         {repos.map((repo) => (
           <ProjectCard
+            key={repo.id}
             id={repo.id}
             name={repo.name}
             description={repo.description}

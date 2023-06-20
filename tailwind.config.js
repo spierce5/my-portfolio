@@ -24,7 +24,7 @@ module.exports = {
     colors: {
       opt1: "#e88873",
       opt2: "#a37774",
-      opt3: "#5c6d70",
+      opt3: "#697ca3",
       opt4: "#484a47",
     },
   },
