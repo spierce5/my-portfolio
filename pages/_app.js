@@ -41,7 +41,7 @@ const theme = createTheme({
       main: "#f4b266",
     },
     opt1: {
-      main: "#e88873",
+      main: "#00447b",
     },
     opt2: {
       main: "#06d6a0",

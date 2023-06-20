@@ -43,7 +43,7 @@ export default function Contact() {
         <title>S. Pierce | Contact</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <main className="flex flex-row">
+      <div className="flex flex-row mt-16">
         <div className="flex flex-col">
           <Typography variant="h3">Contact</Typography>
           <List>
@@ -64,7 +64,7 @@ export default function Contact() {
             ))}
           </List>
         </div>
-      </main>
+      </div>
     </>
   );
 }

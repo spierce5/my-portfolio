@@ -6,17 +6,37 @@ import { Container } from "@mui/material";
 export default function Layout({ metas, children }) {
   return (
     <>
-      <main>
+      <main style={{ width: "100vw" }}>
         <Header />
-        <Container disableGutters={false}>
+        <Container
+          maxWidth={false}
+          sx={{
+            backgroundColor: "opt1.main",
+            paddingTop: ".8rem",
+            paddingBottom: ".8rem",
+            position: "fixed",
+            height: "100vh",
+            width: "100vw",
+          }}
+          disableGutters={false}
+        >
           <div
-            className="w-full h-full min-h-screen pt-16"
             style={{
-              borderLeft: "solid 5px rgba(0, 33, 99, 0.59)",
-              borderRight: "solid 5px rgba(0, 33, 99, 0.59)",
+              backgroundColor: "white",
+              height: "100%",
+              width: "100%",
             }}
+            className="rounded-lg "
           >
-            {children}
+            <div
+              style={{
+                overflowY: "scroll",
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              {children}
+            </div>
           </div>
         </Container>
       </main>
