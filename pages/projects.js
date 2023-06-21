@@ -35,7 +35,7 @@ export default function Projects({ repos }) {
         <title>S. Pierce | Projects</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <div className="flex flex-col w-full min-h-screen items-center mt-16 z-10 space-y-12">
+      <div className="flex flex-col w-full min-h-screen items-center mt-16 z-10 space-y-12 overflow-scroll scroll-smooth">
         {repos.map((repo) => (
           <ProjectCard
             key={repo.id}

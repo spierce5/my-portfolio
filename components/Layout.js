@@ -25,7 +25,7 @@ export default function Layout({ metas, children }) {
               height: "100%",
               width: "100%",
             }}
-            className="rounded-lg "
+            className="rounded-lg p-1"
           >
             <div
               style={{
