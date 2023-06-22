@@ -57,10 +57,10 @@ export default function ProjectCard(props) {
 
   return (
     <>
-      <Card key={props.id} className="w-full">
-        <CardHeader title={formatName(props.name)} />
-        <CardContent>{props.description}</CardContent>
-        <CardActions>
+      <Card key={props.id} className="w-full md:w-96 md:h-60" elevation={3}>
+        <CardHeader title={formatName(props.name)} className="md:h-16" />
+        <CardContent className="md:h-32">{props.description}</CardContent>
+        <CardActions className="md:h-12">
           <Button
             size="small"
             variant="contained"

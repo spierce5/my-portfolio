@@ -64,10 +64,8 @@ export default function SwipeableDrawer(props) {
       <List>
         <ListItem>
           <ListItemText primary="Pages" />
-          <IconButton onClick={() => props.onClose()}>
-            <ListItemIcon>
-              <KeyboardBackspaceIcon />
-            </ListItemIcon>
+          <IconButton onClick={() => props.onClose()} className="max-w-fit">
+            <KeyboardBackspaceIcon />
           </IconButton>
         </ListItem>
         <Divider />

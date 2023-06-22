@@ -38,7 +38,7 @@ export default function Header() {
           borderRadius: "5px",
         }}
         onClick={handleOpen}
-        className="text-2xl  z-40"
+        className="text-2xl max-w-fit z-40"
       >
         <MenuIcon fontSize="large" />
       </IconButton>
