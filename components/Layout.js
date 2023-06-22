@@ -29,7 +29,7 @@ export default function Layout({ metas, children }) {
           >
             <div
               style={{
-                overflowY: "scroll",
+                overflowY: "auto",
                 height: "100%",
                 width: "100%",
               }}
