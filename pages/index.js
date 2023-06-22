@@ -63,6 +63,7 @@ export default function Home({ repos }) {
 
       <div
         id="index"
+        style={{ scrollbarWidth: "thin" }}
         className="flex flex-col h-full min-h-full items-center z-10 space-y-24 snap-y snap-mandatory overflow-auto scroll-smooth"
       >
         <div
