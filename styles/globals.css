@@ -7,6 +7,11 @@ html {
   scrollbar-width: thin;
 }
 
+div {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar {
   width: 9px;
 }
