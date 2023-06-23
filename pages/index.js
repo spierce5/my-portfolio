@@ -26,14 +26,23 @@ export default function Home({ repos }) {
   const competencies = {
     libsFrams: [
       "React",
-      "Next JS",
-      "Node",
-      "Spring Boot",
+      "Next.js",
+      "Node.js",
       "Firebase",
+      "Material UI",
+      "Tailwindcss",
+      "Spring Boot",
       "Pandas",
     ],
-    stylesMarkup: ["HTML", "CSS", "Tailwindcss", "LaTeX"],
-    languages: ["Javascript", "Java", "Python", "MS SQL", "PostgreSQL"],
+    stylesMarkup: ["HTML", "CSS", "LaTeX"],
+    languages: [
+      "JavaScript",
+      "Java",
+      "Python",
+      "MS SQL",
+      "PostgreSQL",
+      "MySQL",
+    ],
   };
 
   const getChipColor = () => {
@@ -68,7 +77,7 @@ export default function Home({ repos }) {
       >
         <div
           id="intro"
-          className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center"
+          className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center md:w-1/3"
         >
           <div className="flex flex-col justify-between items-center ">
             <img
