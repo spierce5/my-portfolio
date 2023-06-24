@@ -1,0 +1,268 @@
+{
+  "resume": {
+    "title": "Samuel Pierce",
+    "author": "Samuel Pierce",
+    "contacts": [
+      "(402) 405-9977",
+      "sam.pierce76@gmail.com",
+      "linkedin.com/in/pierce-samuel",
+      "my-portfolio-spierce5.vercel.app"
+    ],
+    "qrCode": "/files/qr_spierce.jpg",
+    "companies": [
+      {
+        "name": "Aptean",
+        "location": "Alpharetta, GA",
+        "startDate": "2021-08-01",
+        "endDate": "",
+        "positions": [
+          {
+            "title": "Senior Customer Support Consultant",
+            "startDate": "2022-10-01",
+            "endDate": "",
+            "responsibilities": [""]
+          },
+          {
+            "title": "Customer Support Consultant",
+            "startDate": "2022-04-01",
+            "endDate": "2022-10-01",
+            "responsibilities": [""]
+          },
+          {
+            "title": "Customer Success Analyst",
+            "startDate": "2021-08-01",
+            "endDate": "2022-04-01",
+            "responsibilities": [""]
+          }
+        ]
+      },
+      {
+        "name": "The Mill Coffee and Tea",
+        "location": "Lincoln, NE",
+        "startDate": "2019-08-01",
+        "endDate": "2021-05-01",
+        "positions": [
+          {
+            "title": "Warehouse Delivery Driver",
+            "startDate": "",
+            "endDate": "",
+            "responsibilities": []
+          }
+        ]
+      },
+      {
+        "name": "University of Nebraska - Lincoln Department of Mathematics",
+        "location": "Lincoln, NE",
+        "startDate": "2019-08-01",
+        "endDate": "2021-05-01",
+        "positions": [
+          {
+            "title": "Learning Assistant",
+            "startDate": "2020-08-01",
+            "endDate": "2021-05-01",
+            "responsibilities": [
+              "Facilitated learning by working directly with students, answering questions, and asking thought provoking questions to further understanding of course material.",
+              "Lead review sessions prior to exams.",
+              "Conducted attendance and managed Zoom meeting room."
+            ]
+          },
+          {
+            "title": "Math Resource Counselor",
+            "startDate": "2019-08-01",
+            "endDate": "20201-05-01",
+            "responsibilities": [
+              "Provided assistance to students with coursework and course material in subjects such as algebra, trigonometry, and calculus."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Savage City Liquor",
+        "location": "Savage, MN",
+        "startDate": "2018-05-01",
+        "endDate": "2021-08-01",
+        "positions": [
+          {
+            "title": "Liquor Store Clerk",
+            "startDate": "2020-08-01",
+            "endDate": "2021-05-01",
+            "responsibilities": []
+          }
+        ]
+      },
+      {
+        "name": "G4S Secure Solutions",
+        "location": "Lincoln, NE",
+        "startDate": "2016-11-01",
+        "endDate": "2017-12-01",
+        "positions": [
+          {
+            "title": "Custom Protection Officer",
+            "startDate": "",
+            "endDate": "",
+            "responsibilities": [
+              "Custom Protection Officer at Saint Elizabeth’s Medical Center"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Braeda Fresh Express Cafe",
+        "location": "Lincoln, NE",
+        "startDate": "2016-08-01",
+        "endDate": "2017-02-01",
+        "positions": [
+          {
+            "title": "Cashier/Cook",
+            "startDate": "",
+            "endDate": "",
+            "responsibilities": [
+              "Safety Manager: Conducted routine checks of emergency equipment."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "United States Marine Corps",
+        "location": "Okinawa, JA - Twentynine Palms, CA",
+        "startDate": "2012-08-01",
+        "endDate": "2016-08-01",
+        "positions": [
+          {
+            "title": "Sergeant",
+            "startDate": "2016-05-01",
+            "endDate": "2016-08-01",
+            "responsibilities": [
+              "Squad Leader for 1st Battalion 7th Marines Communications Platoon."
+            ]
+          },
+          {
+            "title": "Corporal",
+            "startDate": "2014-04-01",
+            "endDate": "2016-05-01",
+            "responsibilities": [
+              "Deployed to Iraq in Operation Inherent Resolve.",
+              "Radio Operator for Weapons Company 1st Battalion 7th Marines.",
+              "Provided security while mitigating internal threats for Building Partnership Capacity Platoon as they facilitated training for the Iraqi Army.",
+              "Selected as Battalion Commander’s Radio Operator.",
+              "Selected as Battalion Commander’s Driver.",
+              "Selected as member of Battalion Commander’s Personal Security Detail."
+            ]
+          },
+          {
+            "title": "Lance Corporal",
+            "startDate": "2013-07-01",
+            "endDate": "2014-04-01",
+            "responsibilities": [
+              "Established and maintained tactical communication sites.",
+              "Conducted routine maintenance and updated records of communication equipment.",
+              "Obtained billet as Electronic Key Management System Local Element Manager.",
+              "Responsible for accountability of $5.1 million worth of controlled cryptographic items.",
+              "Implemented digital methods of gear accountability and organization."
+            ]
+          },
+          {
+            "title": "Private First Class",
+            "startDate": "2012-08-01",
+            "endDate": "2013-07-01",
+            "responsibilities": [
+              "Graduated from Recruit Training in San Diego, CA.",
+              "Completed Marine Combat Training at the Marine Corps School of Infantry",
+              "Completed Field Radio Operator Course at the Marine Corps Communication and Electronics School",
+              "Began career as Field Radio Operator at Headquarters Battalion 3rd Marine Division Communications Company"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Runza Corporation",
+        "location": "Lincoln, NE",
+        "startDate": "2012-03-01",
+        "endDate": "2012-05-01",
+        "positions": [
+          {
+            "title": "Cashier/Cook",
+            "startDate": "",
+            "endDate": "",
+            "responsibilities": []
+          }
+        ]
+      },
+      {
+        "name": "Fazoli’s Restaurant",
+        "location": "Lincoln, NE",
+        "startDate": "2011-03-01",
+        "endDate": "2011-09-01",
+        "positions": [
+          {
+            "title": "Cashier/Cook/Expediter",
+            "startDate": "",
+            "endDate": "",
+            "responsibilities": []
+          }
+        ]
+      }
+    ],
+    "education": [
+      {
+        "institute": "University of Nebraska-Lincoln",
+        "degree": "B.S. in Mathematics and German",
+        "date": "2021-05-01",
+        "location": "Lincoln, NE"
+      }
+    ],
+    "certificates": [
+      {
+        "title": "Introduction to Data Science in Python",
+        "institute": "University of Michigan, Coursera",
+        "date": "2021-07-25"
+      },
+      {
+        "title": "Responsive Web Design",
+        "institute": "freeCodeCamp",
+        "date": "2021-08-25"
+      },
+      {
+        "title": "JavaScript Algorithms and Data Structures",
+        "institute": "freeCodeCamp",
+        "date": "2021-10-03"
+      },
+      {
+        "title": "Front End Development Libraries",
+        "institute": "freeCodeCamp",
+        "date": "2022-06-05"
+      }
+    ],
+    "skills": {
+      "languages": [
+        "JavaScript",
+        "Python",
+        "Java",
+        "MS SQL",
+        "MySQL",
+        "PostgreSQL"
+      ],
+      "libraries": [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Spring Boot",
+        "Firebase",
+        "Pandas",
+        "Material UI",
+        "Tailwindcss"
+      ],
+      "markup": ["HTML", "CSS", "LaTeX"],
+      "software": ["MS Office", "PowerBI", "Github"]
+    },
+    "interests": [
+      "Math",
+      "Guitar",
+      "German",
+      "Reading",
+      "Singing",
+      "Travelling",
+      "Coding"
+    ]
+  }
+}
