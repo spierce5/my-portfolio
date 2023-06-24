@@ -4,7 +4,7 @@ import { getLocalData } from "../lib/localdata";
 export async function getStaticProps() {
   let resumeData = await getLocalData();
   // resumeData = resumeData.resume;
-  console.log(resumeData);
+  // console.log(resumeData);
   return {
     props: { resumeData },
   };
