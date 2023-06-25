@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Paper, Typography, Box, Divider } from "@mui/material";
 
 const Contacts = ({ contacts }) => {
@@ -51,16 +52,52 @@ const Education = ({ education }) => {
   );
 };
 
-export default function ResumePDF({ data }) {
+const ResumePDF = forwardRef(({ data }, ref) => {
   return (
-    <div className="flex flex-col justify-center text-center items-center">
-      <Paper elevation={1} className="relative px-24 scale-[.35] md:scale-100">
+    <div
+      ref={ref}
+      className="flex flex-col justify-center text-center items-center"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignContent: "center",
+        textAlign: "center",
+      }}
+    >
+      <Paper
+        elevation={1}
+        className="relative px-24 scale-[.35] md:scale-100"
+        style={{
+          position: "relative",
+          paddingLeft: "6rem",
+          paddingRight: "6rem",
+        }}
+      >
         <img
           src="/images/qr_spierce.jpg"
           alt="my-portfolio-spierce5.vercel.app"
           className="absolute top-0 right-0 w-12 h-12"
+          style={{
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+            width: "3rem",
+            height: "3rem",
+          }}
         />
-        <Typography variant="h2" id="title" className="uppercase">
+        <Typography
+          variant="h2"
+          id="title"
+          className="uppercase"
+          style={{
+            textTransform: "uppercase",
+            fontSize: "2.125rem",
+            lineHeight: "1.75rem",
+            color: "black",
+            background: "transparent",
+          }}
+        >
           {data.title}
         </Typography>
         <Contacts contacts={data.contacts} />
@@ -68,4 +105,6 @@ export default function ResumePDF({ data }) {
       </Paper>
     </div>
   );
-}
+});
+
+export default ResumePDF;

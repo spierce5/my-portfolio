@@ -17,6 +17,7 @@
     "framer-motion": "^9.0.2",
     "fs": "^0.0.1-security",
     "isomorphic-dompurify": "^1.1.0",
+    "jspdf": "^2.5.1",
     "material-design-icons": "^3.0.1",
     "next": "latest",
     "react": "18.2.0",
