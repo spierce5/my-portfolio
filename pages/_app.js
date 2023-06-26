@@ -41,16 +41,16 @@ const theme = createTheme({
       main: "#f4b266",
     },
     opt1: {
-      main: "#00447b",
+      main: "#181638",
     },
     opt2: {
-      main: "#06d6a0",
+      main: "#132933",
     },
     opt3: {
-      main: "#697ca3",
+      main: "#031f2b",
     },
     opt4: {
-      main: "#a9ddd6",
+      main: "#141a2b",
     },
     opt5: {
       main: "#8a89c0",
