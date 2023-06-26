@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -10,12 +11,40 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 
 export default function Resume() {
   const width = useWindowWidth();
+  const [numPages, setNumPages] = useState(1);
+
   const downloadPdf = () => {
     const a = document.createElement("a");
     a.href = "./files/PierceS_Resume.pdf";
     a.download = "PierceS_Resume.pdf";
     a.click();
     a.remove();
+  };
+
+  const range = (min, max, inclusive = false) => {
+    let range = [];
+    if (inclusive) {
+      max += 1;
+    }
+    for (let i = min; i < max; i++) {
+      range.push(i);
+    }
+    return range;
+  };
+
+  const CustomPage = (props) => {
+    return (
+      <>
+        <Page
+          key={`page-el-${props.pageNum}`}
+          pageNumber={props.pageNum}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+          width={width * 0.9}
+        />
+        <Divider />
+      </>
+    );
   };
 
   return (
@@ -37,20 +66,16 @@ export default function Resume() {
             Download
           </Button>
         </div>
-        <Document file="./files/PierceS_Resume.pdf" className="">
-          <Page
-            pageNumber={1}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-            width={width * 0.9}
-          />
-          <Divider />
-          <Page
-            pageNumber={2}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-            width={width * 0.9}
-          />
+        <Document
+          file="./files/PierceS_Resume.pdf"
+          className=""
+          onLoadSuccess={({ numPages }) => {
+            setNumPages(numPages);
+          }}
+        >
+          {range(1, numPages, true).map((pageNum) => {
+            return <CustomPage key={`page-${pageNum}`} pageNum={pageNum} />;
+          })}
         </Document>
       </div>
     </>
