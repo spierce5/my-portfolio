@@ -6,8 +6,9 @@ import styles from "../styles/Home.module.css";
 import SchoolIcon from "@mui/icons-material/School";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
-import { Container, Typography, Chip, Button, IconButton } from "@mui/material";
+import { Container, Typography, Button, IconButton } from "@mui/material";
 import ProjectCard from "../components/ProjectCard";
+import Chip from "../components/Chip";
 
 export const getServerSideProps = async () => {
   const res = await fetch("https://api.github.com/users/spierce5/repos");
@@ -43,24 +44,6 @@ export default function Home({ repos }) {
       "PostgreSQL",
       "MySQL",
     ],
-  };
-
-  const getChipColor = () => {
-    const colors = [
-      "opt1.main",
-      "opt2.main",
-      "opt3.main",
-      "opt4.main",
-      "opt5.main",
-      "opt6.main",
-    ];
-
-    const randomColor = colors[Math.floor(Math.random() * 5)];
-
-    return {
-      color: randomColor,
-      borderColor: randomColor,
-    };
   };
 
   return (
@@ -113,13 +96,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Languages</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.languages.map((lang) => (
-                  <Chip
-                    key={lang}
-                    label={lang}
-                    size="small"
-                    variant="filled"
-                    color="primary"
-                  />
+                  <Chip label={lang} />
                 ))}
               </div>
             </div>
@@ -127,13 +104,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Libraries & Frameworks</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.libsFrams.map((libFram) => (
-                  <Chip
-                    key={libFram}
-                    label={libFram}
-                    size="small"
-                    variant="filled"
-                    color="primary"
-                  />
+                  <Chip label={libFram} />
                 ))}
               </div>
             </div>
@@ -141,13 +112,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Markup & Styles</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.stylesMarkup.map((sM) => (
-                  <Chip
-                    key={sM}
-                    label={sM}
-                    size="small"
-                    variant="filled"
-                    color="primary"
-                  />
+                  <Chip label={sM} />
                 ))}
               </div>
             </div>

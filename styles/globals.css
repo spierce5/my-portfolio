@@ -10,6 +10,7 @@ html {
 div {
   scroll-behavior: smooth;
   scrollbar-width: thin;
+  color: #162852;
 }
 
 ::-webkit-scrollbar {
@@ -38,6 +39,7 @@ a {
 
 * {
   box-sizing: border-box;
+  /* color: #162852; */
 }
 
 img {

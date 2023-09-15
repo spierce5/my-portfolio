@@ -59,9 +59,9 @@ export default function Resume() {
             onClick={downloadPdf}
             size="small"
             variant="contained"
-            color="primary"
+            color="info"
             startIcon={<FileDownloadIcon />}
-            className="self-end max-w-min"
+            className="self-end max-w-min text-white"
           >
             Download
           </Button>

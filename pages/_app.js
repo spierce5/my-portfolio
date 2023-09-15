@@ -34,6 +34,12 @@ const theme = createTheme({
     secondary: {
       main: "#a1a1aa",
     },
+    info: {
+      main: "#162852",
+    },
+    success: {
+      main: "#ffffff",
+    },
     tertiary: {
       main: "#ffffff",
     },
@@ -44,7 +50,7 @@ const theme = createTheme({
       main: "#181638",
     },
     opt2: {
-      main: "#132933",
+      main: "#162852",
     },
     opt3: {
       main: "#031f2b",

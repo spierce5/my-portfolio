@@ -64,7 +64,7 @@ export default function ProjectCard(props) {
           <Button
             size="small"
             variant="contained"
-            color="primary"
+            color="info"
             href={props.url}
             target="_blank"
           >
