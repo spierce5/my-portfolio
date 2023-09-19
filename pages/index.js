@@ -55,16 +55,9 @@ export default function Home({ repos }) {
         style={{ scrollbarWidth: "thin" }}
         className="flex flex-col h-full min-h-full items-center z-10 space-y-24 snap-y snap-mandatory overflow-auto scroll-smooth"
       >
-        <motion.div
+        <div
           id="intro"
           className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center md:w-1/3"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1,
-            delay: 1,
-            ease: [0, 0.71, 0.2, 1.01],
-          }}
         >
           <div className="flex flex-col justify-between items-center ">
             <img
@@ -86,7 +79,7 @@ export default function Home({ repos }) {
           <IconButton href="#skills" className="animate-pulse max-w-fit">
             <KeyboardDoubleArrowDownIcon fontSize="large" />
           </IconButton>
-        </motion.div>
+        </div>
         <div
           id="skills"
           className="h-screen min-h-screen flex flex-col justify-center items-center text-center space-y-4 snap-always snap-center"

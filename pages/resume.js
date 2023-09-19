@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { Button, Divider, Typography } from "@mui/material";
@@ -53,7 +54,16 @@ export default function Resume() {
         <title>S. Pierce|Resume</title>
         <link rel="icon" href="/bookmark-book.ico" />
       </Head>
-      <div className="mt-16 flex flex-col w-full items-center">
+      <motion.div
+        className="mt-16 flex flex-col w-full items-center"
+        // initial={{ opacity: 1, scale: 1, y: 1000 }}
+        // animate={{ opacity: 1, scale: 1, y: 0 }}
+        // transition={{
+        //   duration: 1,
+        //   delay: 0.3,
+        //   ease: [0, 0.71, 0.2, 1.01],
+        // }}
+      >
         <div className="w-11/12 self-start flex justify-end">
           <Button
             onClick={downloadPdf}
@@ -72,12 +82,19 @@ export default function Resume() {
           onLoadSuccess={({ numPages }) => {
             setNumPages(numPages);
           }}
+          initial={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+            delay: 0.3,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
         >
           {range(1, numPages, true).map((pageNum) => {
             return <CustomPage key={`page-${pageNum}`} pageNum={pageNum} />;
           })}
         </Document>
-      </div>
+      </motion.div>
     </>
   );
 }

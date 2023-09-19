@@ -79,7 +79,11 @@ function MyApp({ Component, pageProps, router }) {
           // mode="wait"
           >
             <Layout>
-              <Component {...pageProps} key={router.route} />
+              <Component
+                {...pageProps}
+                key={router.route}
+                route={router.route}
+              />
             </Layout>
             <Analytics />
           </AnimatePresence>
