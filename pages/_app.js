@@ -70,14 +70,17 @@ const theme = createTheme({
 function MyApp({ Component, pageProps, router }) {
   useEffect(() => {}, [router.events]);
 
-  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
-
   return (
     <>
       <main className={workSans.className}>
         <ThemeProvider theme={theme}>
-          <AnimatePresence initial={false} mode="wait">
-            {getLayout(<Component {...pageProps} key={router.route} />)}
+          <AnimatePresence
+          // initial={false}
+          // mode="wait"
+          >
+            <Layout>
+              <Component {...pageProps} key={router.route} />
+            </Layout>
             <Analytics />
           </AnimatePresence>
           <ToastContainer {...toastOptions} />

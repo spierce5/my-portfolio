@@ -1,12 +1,9 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
-import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import styles from "../styles/Home.module.css";
-import SchoolIcon from "@mui/icons-material/School";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowUpRounded";
-import { Container, Typography, Button, IconButton } from "@mui/material";
+import { Typography, Button, IconButton } from "@mui/material";
 import ProjectCard from "../components/ProjectCard";
 import Chip from "../components/Chip";
 
@@ -58,9 +55,16 @@ export default function Home({ repos }) {
         style={{ scrollbarWidth: "thin" }}
         className="flex flex-col h-full min-h-full items-center z-10 space-y-24 snap-y snap-mandatory overflow-auto scroll-smooth"
       >
-        <div
+        <motion.div
           id="intro"
           className="space-y-12 h-screen min-h-screen flex flex-col justify-center items-center snap-always snap-center md:w-1/3"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+            delay: 1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }}
         >
           <div className="flex flex-col justify-between items-center ">
             <img
@@ -82,7 +86,7 @@ export default function Home({ repos }) {
           <IconButton href="#skills" className="animate-pulse max-w-fit">
             <KeyboardDoubleArrowDownIcon fontSize="large" />
           </IconButton>
-        </div>
+        </motion.div>
         <div
           id="skills"
           className="h-screen min-h-screen flex flex-col justify-center items-center text-center space-y-4 snap-always snap-center"
@@ -96,7 +100,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Languages</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.languages.map((lang) => (
-                  <Chip label={lang} />
+                  <Chip key={lang} label={lang} />
                 ))}
               </div>
             </div>
@@ -104,7 +108,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Libraries & Frameworks</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.libsFrams.map((libFram) => (
-                  <Chip label={libFram} />
+                  <Chip key={libFram} label={libFram} />
                 ))}
               </div>
             </div>
@@ -112,7 +116,7 @@ export default function Home({ repos }) {
               <Typography variant="h5">Markup & Styles</Typography>
               <div className="gap-1 flex flex-wrap justify-center">
                 {competencies.stylesMarkup.map((sM) => (
-                  <Chip label={sM} />
+                  <Chip key={sM} label={sM} />
                 ))}
               </div>
             </div>
